@@ -4,7 +4,7 @@ let status = document.createElement("div");
 
 submit.addEventListener("click", function () {
   if (input.value.trim()) {
-    chatToVoice(input.value);
+    playAiVoice(input.value);
   }
 });
 
