@@ -1,7 +1,9 @@
 let input = document.getElementById("input");
 let submit = document.getElementById("submit");
 
-submit.addEventListener("click", function () {});
+submit.addEventListener("click", function () {
+    chatToVoice(input.value);
+});
 
 function chatToVoice(prompt) {
   fetch("/.netlify/functions/chat", {
