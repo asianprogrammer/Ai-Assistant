@@ -2,14 +2,14 @@ let input = document.getElementById("input");
 let submit = document.getElementById("submit");
 
 submit.addEventListener("click", function () {
-    chatToVoice(input.value);
+  chatToVoice(input.value);
 });
 
 function chatToVoice(prompt) {
   fetch("/.netlify/functions/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt: prompt}),
+    body: JSON.stringify({ prompt: prompt }),
   })
     .then((res) => {
       if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
@@ -28,10 +28,11 @@ function playAiVoice(text) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ text: text }),
   })
-    .then((res) => res.blob())
-    .then((blob) => {
-      const audioUrl = URL.createObjectURL(blob);
-      const audio = new Audio(audioUrl);
+    .then((res) => res.arrayBuffer())
+    .then((buffer) => {
+      const blob = new Blob([buffer], { type: "audio/mpeg" }); // use correct MIME type
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
       audio.play();
     })
     .catch((err) => console.error("Voice error:", err));
