@@ -1,12 +1,13 @@
 let input = document.getElementById("input");
 let submit = document.getElementById("submit");
 
-submit.addEventListener("click", function () {
-  console.log(input.value);
+submit.addEventListener("click", function () {});
+
+function chatToVoice(prompt) {
   fetch("/.netlify/functions/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt: "Tell me a joke." }),
+    body: JSON.stringify({ prompt: prompt}),
   })
     .then((res) => {
       if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
@@ -14,25 +15,9 @@ submit.addEventListener("click", function () {
     })
     .then((data) => {
       console.log("AI says:", data.response);
-      playAiVoice("hello, Playing AI voice")
-      EdgeTTS(data.response);
+      playAiVoice(data.response);
     })
     .catch((error) => console.error("Error:", error));
-});
-
-function EdgeTTS(text) {
-  fetch("/.netlify/functions/voice", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Data from voice function:", data);
-      const msg = new SpeechSynthesisUtterance(data.response);
-      window.speechSynthesis.speak(msg);
-    })
-    .catch((err) => console.error("TTS Error:", err));
 }
 
 function playAiVoice(text) {
