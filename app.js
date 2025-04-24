@@ -1,12 +1,32 @@
 let input = document.getElementById("input");
 let submit = document.getElementById("submit");
-let status = document.createElement("div");
 
 submit.addEventListener("click", function () {
   if (input.value.trim()) {
-    playAiVoice(input.value);
+    chatToVoice(input.value);
   }
 });
+
+function chatToVoice(prompt) {
+  fetch("/.netlify/functions/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt: prompt }),
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+      return res.json();
+    })
+    .then((data) => {
+      console.log("AI says:", data.response);
+      playAiVoice(data.response);
+    })
+    .catch((error) => {
+      console.error("Error in chat function:", error);
+      // Provide user feedback about the error
+      alert("Sorry, there was a problem processing your request.");
+    });
+}
 
 function playAiVoice(text) {
   console.log("Generating voice...");
