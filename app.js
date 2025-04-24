@@ -14,6 +14,7 @@ submit.addEventListener("click", function () {
     })
     .then((data) => {
       console.log("AI says:", data.response);
+      playAiVoice("hello, Playing AI voice")
       EdgeTTS(data.response);
     })
     .catch((error) => console.error("Error:", error));
@@ -34,15 +35,17 @@ function EdgeTTS(text) {
     .catch((err) => console.error("TTS Error:", err));
 }
 
-fetch("/.netlify/functions/voice", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ text: "Hello world" }),
-})
-  .then((res) => res.blob())
-  .then((blob) => {
-    const audioUrl = URL.createObjectURL(blob);
-    const audio = new Audio(audioUrl);
-    audio.play();
+function playAiVoice(text) {
+  fetch("/.netlify/functions/voice", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text: text }),
   })
-  .catch((err) => console.error("Voice error:", err));
+    .then((res) => res.blob())
+    .then((blob) => {
+      const audioUrl = URL.createObjectURL(blob);
+      const audio = new Audio(audioUrl);
+      audio.play();
+    })
+    .catch((err) => console.error("Voice error:", err));
+}
