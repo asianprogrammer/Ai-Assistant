@@ -18,27 +18,38 @@ exports.handler = async function (event, context) {
       };
     }
 
-    const response = await etch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-Key": `${apiKey}`,
-      },
-      body: JSON.stringify({ text: text }),
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+    const ttsResponse = await fetch(
+      "https://weekly-aprilette-asianprogrammer-b2a7bac6.koyeb.app/tts",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-Key": apiKey,
+        },
+        body: JSON.stringify({ text }),
       }
-      return response.blob();
-    });
+    );
 
-    const data = await response();
+    if (!ttsResponse.ok) {
+      const errorText = await ttsResponse.text();
+      console.error("TTS API Error:", errorText);
+      return {
+        statusCode: ttsResponse.status,
+        body: JSON.stringify({ error: "TTS API failed", detail: errorText }),
+      };
+    }
+
+    const audioBuffer = await ttsResponse.arrayBuffer();
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ response: data.choices[0].message.content }),
+      headers: {
+        "Content-Type": "audio/mpeg",
+        "Content-Disposition": 'inline; filename="speech.mp3"',
+      },
+      body: Buffer.from(audioBuffer).toString("base64"),
+      isBase64Encoded: true,
     };
-
   } catch (error) {
     console.error("Serverless Function Error:", error);
     return {
