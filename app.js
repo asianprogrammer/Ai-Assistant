@@ -22,18 +22,18 @@ function chatToVoice(prompt) {
     .catch((error) => console.error("Error:", error));
 }
 
-function playAiVoice(text) {
-  fetch("/.netlify/functions/voice", {
+async function playAiVoice(text) {
+  // 1️⃣ Call TTS API to get a Blob from function
+  const response = await fetch("/.netlify/functions/voice", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text: text }),
-  })
-    .then((res) => res.arrayBuffer())
-    .then((buffer) => {
-      const blob = new Blob([buffer], { type: "audio/mpeg" }); // use correct MIME type
-      const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
-      audio.play();
-    })
-    .catch((err) => console.error("Voice error:", err));
+    body: JSON.stringify({ text }),
+  });
+  // 2️⃣ Read raw bytes
+  const arrayBuffer = await response.arrayBuffer();
+  // 3️⃣ Create a playable Blob
+  const blob = new Blob([arrayBuffer], { type: "audio/mpeg" });
+  const url = URL.createObjectURL(blob);
+  const audio = new Audio(url);
+  await audio.play(); // may reject if user gesture required :contentReference[oaicite:4]{index=4}
 }
