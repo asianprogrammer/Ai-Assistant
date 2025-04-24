@@ -3,13 +3,15 @@ let submit = document.getElementById('submit')
 
 submit.addEventListener('click', function() {
     console.log(input.value)
-    fetch("/.netlify/functions/getData", {
+    fetch("/.netlify/functions/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prompt: "Tell me something interesting about space.",
-        }),
+        body: JSON.stringify({ prompt: "Tell me a joke." }),
       })
-        .then(res => res.json())
-        .then(data => console.log("AI says:", data.response));
+        .then((res) => {
+          if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+          return res.json();
+        })
+        .then((data) => console.log("AI says:", data.response))
+        .catch((error) => console.error("Error:", error));
 })
