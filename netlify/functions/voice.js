@@ -26,7 +26,8 @@ exports.handler = async function (event, context) {
           "Content-Type": "application/json",
           "X-API-Key": apiKey,
         },
-        body: JSON.stringify({ text }),
+        body: Buffer.from(audioBuffer).toString("base64"),
+        isBase64Encoded: true,
       }
     );
 
