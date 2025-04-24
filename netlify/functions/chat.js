@@ -6,7 +6,7 @@ exports.handler = async function(event, context) {
     };
   }
 
-  const apiKey = process.env.MY_SECRET_API_KEY;
+  const apiKey = process.env.API_KEY;
 
   try {
     const { prompt } = JSON.parse(event.body);
