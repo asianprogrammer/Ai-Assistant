@@ -48,7 +48,7 @@
     />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./assets/styles/flex.css" />
-    <script src="./app.js" defer></script>
+    <!-- <script src="./app.js" defer></script> -->
     <script type="application/ld+json">
       {
         "@context": "https://iodv.netlify.app",
@@ -72,35 +72,41 @@
       }
     </script>
   </head>
-  <body>
+  <body class="dynamic-style">
     <main>
       <section class="main">
         <article>
-          <h1>Parvez Ahmed</h1>
-          <p>
-            Self-taught full-stack web developer turning Figma designs into
-            fast, responsive, <br />
-            SEO-optimized applications.
-          </p>
-          <a
-            target="_blank"
-            href="https://www.facebook.com/programmerasian"
-            class="connect flex F-center"
-            rel="noopener noreferrer"
-          >
-            Connect
-            <div class="icon">
-              <img
-                src="./assets/icons/connect.svg"
-                alt="Connect with Parvez Ahmed"
-              />
-            </div>
-          </a>
+          <div class="animation">
+            <h1 id="main-text">Parvez Ahmed</h1>
+          </div>
+          <div class="animation">
+            <p class="main-info">
+              Self-taught full-stack web developer turning Figma designs into
+              fast, responsive, <br />
+              SEO-optimized applications.
+            </p>
+          </div>
+          <div class="animation">
+            <a
+              target="_blank"
+              href="https://www.facebook.com/programmerasian"
+              class="connect flex F-center"
+              rel="noopener noreferrer"
+            >
+              Connect
+              <div class="icon">
+                <img
+                  src="./assets/icons/connect.svg"
+                  alt="Connect with Parvez Ahmed"
+                />
+              </div>
+            </a>
+          </div>
         </article>
 
         <footer>
           <div class="social-icons flex FY-center">
-            <a
+            <a style="--i: 1"
               toText="Github Account {/}"
               target="_blank"
               href="https://github.com/asianprogrammer"
@@ -113,7 +119,7 @@
                 />
               </div>
             </a>
-            <a
+            <a style="--i: 2"
               toText="Connect on Facebook ƒ"
               href="https://www.facebook.com/programmerasian"
               target="_blank"
@@ -126,7 +132,7 @@
                 />
               </div>
             </a>
-            <a
+            <a style="--i: 3"
               toText="Message on Telegram ꕤ"
               href="https://t.me/x86_pro"
               target="_blank"
@@ -136,7 +142,7 @@
                 <img src="./assets/icons/telegram.svg" alt="Telegram" />
               </div>
             </a>
-            <a
+            <a style="--i: 4"
               toText="「Messange on Messanger」"
               href="https://m.me/programmerasian?text=From%portfolio%website!"
               target="_blank"
@@ -151,7 +157,9 @@
               </div>
             </a>
           </div>
-          <p>connect with me on some other platforms <br />thanks you..</p>
+          <div class="animation">
+            <p id="social">connect with me on some other platforms <br />thanks you..</p>
+          </div>
         </footer>
       </section>
 
@@ -169,7 +177,7 @@
     <section class="image-container">
       <div class="image">
         <div class="target-line">
-            <h3 class="short-text">Hi, I am Sora Parvez Personal Assestent</h3>
+          <h3 class="short-text">Hi, I am Sora Parvez Personal Assestent</h3>
           <svg
             width="130"
             height="55"
@@ -185,6 +193,7 @@
       </div>
     </section>
 
+    <script src="./assets/js/animation.js"></script>
     <script src="app.test.js"></script>
   </body>
 </html>
