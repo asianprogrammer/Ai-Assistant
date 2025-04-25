@@ -75,7 +75,7 @@ main {
     overflow: hidden;
     border-radius: 50%;
     position: absolute;
-    background: #7942BC;
+    background: rgba(115, 0, 255, 0.424);
 }
 
 .ai-button::before {
@@ -89,15 +89,15 @@ main {
     overflow: hidden;
     background: url(./assets/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png) repeat;
     border-radius: 50%;
-    background-size: 150%;
-    transition: all 20s ease-out;
+    background-size: 250%;
+    transition: background-position 1s ease-out;
     background-position: 0% 0%;
     opacity: .2;
 }
 
 .ai-button:hover::before {
+    opacity: .2;
     background-position: 0 0;
-    transition: all 20s ease-out;
     animation: driftTopLeft 20s linear infinite;
     -webkit-animation: driftTopLeft 20s linear infinite;
     -moz-animation: driftTopLeft 20s linear infinite;
