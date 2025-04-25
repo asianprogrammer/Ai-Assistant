@@ -12,3 +12,7 @@
     -ms-flex-pack: center;
     justify-content: center;
 }
+
+.FX-end {
+    justify-content: flex-end;
+}
