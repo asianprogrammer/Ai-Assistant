@@ -9,16 +9,31 @@ body {
     margin: 2em;
 }
 
+img {
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
 main {
-    width: 100%;
     height: calc(100vh - 4em);
+    position: relative;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
     position: relative;
     border-radius: 60px;
     background: #7942BC;
-    border-top-left-radius: 170px;
+    border-top-left-radius: 120px;
 }
 
-main::before {
+.main::before {
     content: '';
     top: 0;
     left: 0;
@@ -34,9 +49,91 @@ main::before {
     border-top-left-radius: 170px;
 }
 
-#svg {
+.svg {
+    left: 0;
+    width: 8em;
+    z-index: 99;
+    top: -0.52px;
+    position: absolute;
+}
+
+.svg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+.ai-button {
+    left: 0.5em;
+    width: 2em;
+    top: -0.5em;
+    height: 2em;
+    padding: 1em;
+    z-index: 9999;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 50%;
+    position: absolute;
+    background: #7942BC;
+}
+
+.ai-button::before {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 99;
-    position: absolute;
+    overflow: hidden;
+    background: url(./assets/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png) repeat;
+    border-radius: 50%;
+    background-size: 150%;
+    transition: all 20s ease-out;
+    background-position: 0% 0%;
+    opacity: .2;
+}
+
+.ai-button:hover::before {
+    background-position: 0 0;
+    transition: all 20s ease-out;
+    animation: driftTopLeft 20s linear infinite;
+    -webkit-animation: driftTopLeft 20s linear infinite;
+    -moz-animation: driftTopLeft 20s linear infinite;
+    -o-animation: driftTopLeft 20s linear infinite;
+    -ms-animation: driftTopLeft 20s linear infinite;
+}
+
+@keyframes driftTopLeft {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% -100%; }
+}
+
+@-webkit-keyframes driftTopLeft {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% -100%; }
+}
+
+@-moz-keyframes driftTopLeft {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% -100%; }
+}
+
+@-o-keyframes driftTopLeft {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% -100%; }
+}
+
+@-ms-keyframes driftTopLeft {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% -100%; }
+}
+
+.ai-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 99;
 }
