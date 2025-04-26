@@ -123,7 +123,7 @@ function toggleCSSRule(shouldAdd = true) {
   // Add the CSS rule
 
 // Usage
-createSVGFrame(true); // To show the SVG
+createSVGFrame(false); // To show the SVG
 // createSVGFrame(false); // To hide the SVG (uncomment to test)
 setTimeout(() => {
     // toggleCSSRule(); // Defaults to true

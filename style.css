@@ -45,10 +45,7 @@ body::before {
   animation: aiGradientY 8s ease-in-out infinite;
   filter: blur(5px);
   /* 3. Paint that transparent border with the gradient */
-  border-image-source: linear-gradient(
-    to top,
-    #8e44ad, #3498db, #2ecc71, #e74c3c
-  );                                  /* gradient as border-image :contentReference[oaicite:2]{index=2} */
+  border-image-source: conic-gradient(from 90deg,rgba(240, 184, 62, 1) 0deg,rgba(240, 184, 62, 1) 57.6deg,rgba(228, 52, 86, 1) 118.8deg,rgba(160, 53, 207, 1) 172.8deg,rgba(241, 185, 62, 1) 230.4deg,rgba(115, 53, 242, 1) 288deg,rgba(240, 184, 62, 1) 360deg);                            
   border-image-slice: 1;              /* use entire gradient slice :contentReference[oaicite:3]{index=3} */
   border-image-repeat: round;         /* avoid gaps :contentReference[oaicite:4]{index=4} */
 
@@ -56,7 +53,7 @@ body::before {
   z-index: -1;
 }
 
-body::after {
+/* body::after {
   content: "";
   position: fixed;
   top: 0;
@@ -67,7 +64,7 @@ body::after {
   background: red;
   mask: url("#svg-frame") center / contain no-repeat;
   mask-size: 100em;
-}
+} */
 
 /* Keyframes for vertical (Y-axis) gradient animation */
 @keyframes aiGradientY {
