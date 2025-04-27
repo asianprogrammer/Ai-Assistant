@@ -7,7 +7,6 @@
   font-family: "Inter";
   src: url("./assets/fonts/Inter-Regular.ttf") format("truetype");
 }
-
 div,
 h1,
 p,
@@ -30,7 +29,7 @@ body {
   z-index: 1;
 }
 
-body::before {
+bodys::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -53,24 +52,44 @@ body::before {
   z-index: -1;
 }
 
-/* body::after {
+
+
+.ai-animation::after {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: red;
-  mask: url("#svg-frame") center / contain no-repeat;
-  mask-size: 100em;
-} */
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--angle),
+    rgba(240, 184, 62, 1) 0deg,
+    rgba(240, 184, 62, 1) 57.6deg,
+    rgba(228, 52, 86, 1) 118.8deg,
+    rgba(160, 53, 207, 1) 172.8deg,
+    rgba(241, 185, 62, 1) 230.4deg,
+    rgba(115, 53, 242, 1) 288deg,
+    rgba(240, 184, 62, 1) 360deg
+  );
+  mask: url("#supper-svg") center / contain no-repeat, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: spinConic .5s linear infinite;
+}
 
-/* Keyframes for vertical (Y-axis) gradient animation */
-@keyframes aiGradientY {
-  0%   { background-position-y: 100%; }  /* start with bottom of gradient */
-  50%  { background-position-y:   0%; }  /* move to top */
-  100% { background-position-y: 100%; }  /* return to bottom */
+.ai-animation {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  filter: blur(7px);
+  z-index: 9999;
+  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  clip-path: polygon(0 90%, 100% 90%, 100% 100%, 0% 100%);
+}
+
+.ai-animation:hover {
+  clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 img {
