@@ -27,39 +27,15 @@ body {
   background-color: #16161f;
   margin: 2em;
   z-index: 1;
+  filter: url(#waveFilter);
 }
-
-bodys::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  
-  /* 1. Set border thickness to 1em */
-  border: 1em solid transparent;     /* defines the frame width :contentReference[oaicite:1]{index=1} */
-  border-radius: 40px;               /* round corners */
-
-  /* 2. Gradient animation background (same as before) */
-  background: #16161f no-repeat;
-  background-size: 100% 200%;  
-  animation: aiGradientY 8s ease-in-out infinite;
-  filter: blur(5px);
-  /* 3. Paint that transparent border with the gradient */
-  border-image-source: conic-gradient(from 90deg,rgba(240, 184, 62, 1) 0deg,rgba(240, 184, 62, 1) 57.6deg,rgba(228, 52, 86, 1) 118.8deg,rgba(160, 53, 207, 1) 172.8deg,rgba(241, 185, 62, 1) 230.4deg,rgba(115, 53, 242, 1) 288deg,rgba(240, 184, 62, 1) 360deg);                            
-  border-image-slice: 1;              /* use entire gradient slice :contentReference[oaicite:3]{index=3} */
-  border-image-repeat: round;         /* avoid gaps :contentReference[oaicite:4]{index=4} */
-
-  pointer-events: none;
-  z-index: -1;
-}
-
-
 
 .ai-animation::after {
   content: "";
-  position: fixed;
   width: 100%;
   height: 100%;
   z-index: 9999;
+  position: fixed;
   pointer-events: none;
   background: conic-gradient(
     from var(--angle),
@@ -74,6 +50,7 @@ bodys::before {
   mask: url("#supper-svg") center / contain no-repeat, linear-gradient(#000 0 0);
   mask-composite: exclude;
   animation: spinConic .5s linear infinite;
+  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ai-animation {
