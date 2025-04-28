@@ -61,6 +61,7 @@ body {
   position: fixed;
   filter: blur(7px);
   z-index: 9999;
+  pointer-events: none;
   transform: scale(2);
   animation: scaleDown .8s forwards;
   transition: all 3s ease-in-out;
@@ -77,7 +78,6 @@ body {
     transform: scale(1);
   }
 }
-
 
 
 /* .ai-animation:hover {
@@ -238,19 +238,23 @@ article {
 }
 
 .animation {
+  opacity: 0;
   width: max-content;
   height: max-content;
-  transform-origin: left center;
   transform: rotate(20deg);
-  animation-delay: 1s;
+  transition: all 0.5s ease-out;
+  transform-origin: left center;
   animation: rotate 1s ease-out forwards;
+  animation-delay: var(--d);
 }
 
 @keyframes rotate {
   0% {
+    opacity: 0;
     transform: rotate(20deg);
   }
   100% {
+    opacity: 1;
     transform: rotate(0deg);
   }
 }
