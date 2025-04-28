@@ -190,3 +190,4 @@ function controlGradient(shouldShow = true) {
 }
 
 controlGradient(true);
+
