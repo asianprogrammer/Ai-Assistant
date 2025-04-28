@@ -123,20 +123,22 @@ function animateW(element, className) {
 
 function animateR(element, className) {
   const el = document.querySelector(element);
-  if (!el) return; // Exit if element is not found
+  if (!el) return;
 
   const text = el.innerHTML;
   let count = 0;
   el.innerHTML = text.replace(/(<[^>]+>|\S+|\s+)/g, (match) => {
     if (match.startsWith("<")) return match;
     if (match.trim() === "") return match;
-    return `<span class="${className}" style="top: ${count * 2}em; --i: ${
-      count++ * Math.floor(Math.random() * text.length)
+    return `<span class="${className}" style="top: ${count * 3}em; --i: ${
+      count++ * Math.floor(Math.random(1) * text.length)
     }">${match}</span>`;
   });
 }
 
-animate("#main-text", "letter");
-animateW(".main-info", "random");
-animate(".moveAnimation", "moveAnimation");
-animateR("#social", "fadeIn");
+document.addEventListener("DOMContentLoaded", () => {
+  animate("#main-text", "letter");
+  animateW(".main-info", "random");
+  animate(".moveAnimation", "moveAnimation");
+  animateR("#social", "randomFade");
+})

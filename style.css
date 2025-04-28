@@ -397,6 +397,24 @@ footer a {
   animation-delay: var(--i)ms;
 }
 
+.randomFade {
+  opacity: 0;
+  transform: scale(2);
+  animation: randFade 0.5s cubic-bezier(.65,.91,0,.63) forwards;
+  animation-delay: calc(var(--i) * 6ms);
+}
+
+@keyframes randFade {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
