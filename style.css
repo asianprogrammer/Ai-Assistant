@@ -478,6 +478,7 @@ footer a {
 
 .randomFade {
   opacity: 0;
+  display: inline-block;
   -webkit-transform: scale(2);
       -ms-transform: scale(2);
           transform: scale(2);
@@ -495,8 +496,8 @@ footer a {
   }
   100% {
     opacity: 1;
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    -webkit-transform: scale(2);
+            transform: scale(2);
   }
 }
 
