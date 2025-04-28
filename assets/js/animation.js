@@ -1,3 +1,97 @@
+window.createSVGFrame = function (show = false, borderRadius = 40) {
+  let svgElement = document.querySelector("#svg-frame");
+
+  if (show && !svgElement) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("id", "svg-frame");
+    svg.style.position = "fixed";
+    svg.style.top = 0;
+    svg.style.left = 0;
+    svg.style.width = "100%";
+    svg.style.height = "100%";
+    svg.style.zIndex = -1111111;
+    svg.style.pointerEvents = "none"; 
+    svg.style.display = "block";
+
+    const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    const mask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    mask.setAttribute("id", "supper-svg");
+
+    const maskGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const blackRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    blackRect.setAttribute("x", 0);
+    blackRect.setAttribute("y", 0);
+    blackRect.setAttribute("width", "100%");
+    blackRect.setAttribute("height", "100%");
+    blackRect.setAttribute("fill", "none");
+
+    const whiteRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    whiteRect.setAttribute("x", 10);
+    whiteRect.setAttribute("y", 10);
+    whiteRect.setAttribute("fill", "white");
+    whiteRect.setAttribute("rx", borderRadius);
+    whiteRect.setAttribute("ry", borderRadius);
+
+    maskGroup.appendChild(blackRect);
+    maskGroup.appendChild(whiteRect);
+    mask.appendChild(maskGroup);
+    defs.appendChild(mask);
+    svg.appendChild(defs);
+
+    const backgroundRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    backgroundRect.setAttribute("width", "100%");
+    backgroundRect.setAttribute("height", "100%");
+    backgroundRect.setAttribute("fill", "none");
+    backgroundRect.setAttribute("mask", "url(#svg-mask)");
+
+    svg.appendChild(backgroundRect);
+    document.body.appendChild(svg);
+
+    const updateSVGSize = () => {
+      svg.setAttribute("width", window.innerWidth);
+      svg.setAttribute("height", window.innerHeight);
+      svg.setAttribute("viewBox", `0 0 ${window.innerWidth} ${window.innerHeight}`);
+      whiteRect.setAttribute("width", window.innerWidth - 20);
+      whiteRect.setAttribute("height", window.innerHeight - 20);
+    };
+
+    updateSVGSize();
+    window.addEventListener("resize", updateSVGSize);
+
+    svg._updateSVGSize = updateSVGSize;
+
+  } else if (!show && svgElement) {
+    window.removeEventListener("resize", svgElement._updateSVGSize);
+    document.body.removeChild(svgElement);
+  }
+};
+
+
+let rotateInterval;
+
+function controlGradient(shouldShow = true) {
+  const bodyAfter = document.querySelector('.ai-animation');
+
+  if (shouldShow) {
+    bodyAfter.style.setProperty('--angle', '0deg');
+    bodyAfter.style.setProperty('opacity', '1');
+
+    let currentAngle = 0;
+    clearInterval(rotateInterval);
+
+    rotateInterval = setInterval(() => {
+      currentAngle += 1;
+      if (currentAngle >= 350) {
+        currentAngle = 0;
+      }
+      bodyAfter.style.setProperty('--angle', currentAngle + 'deg');
+    }, 16); // about 60fps = 1000ms/60 ≈ 16ms
+  } else {
+    clearInterval(rotateInterval);
+    bodyAfter.style.setProperty('opacity', '0');
+  }
+}
+
 function animate(element, className) {
   const el = document.querySelector(element);
   if (!el) return;
@@ -46,148 +140,3 @@ animate("#main-text", "letter");
 animateW(".main-info", "random");
 animate(".moveAnimation", "moveAnimation");
 animateR("#social", "fadeIn");
-
-// creating svg function call
-window.createSVGFrame = function (show = false, borderRadius = 40) {
-  let svgElement = document.querySelector("#svg-frame");
-
-  if (show && !svgElement) {
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("id", "svg-frame");
-    svg.style.position = "fixed";
-    svg.style.top = 0;
-    svg.style.left = 0;
-    svg.style.width = "100%";
-    svg.style.height = "100%";
-    svg.style.zIndex = -1111111;
-    svg.style.pointerEvents = "none"; // So clicks go through
-    svg.style.display = "block";
-
-    const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    const mask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
-    mask.setAttribute("id", "supper-svg");
-
-    const maskGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-
-    // Black fill (full cover)
-    const blackRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    blackRect.setAttribute("x", 0);
-    blackRect.setAttribute("y", 0);
-    blackRect.setAttribute("width", "100%");
-    blackRect.setAttribute("height", "100%");
-    blackRect.setAttribute("fill", "none");
-
-    // Transparent hole (white rect inside)
-    const whiteRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    whiteRect.setAttribute("x", 10);
-    whiteRect.setAttribute("y", 10);
-    whiteRect.setAttribute("fill", "white");
-    whiteRect.setAttribute("rx", borderRadius);
-    whiteRect.setAttribute("ry", borderRadius);
-
-    maskGroup.appendChild(blackRect);
-    maskGroup.appendChild(whiteRect);
-    mask.appendChild(maskGroup);
-    defs.appendChild(mask);
-    svg.appendChild(defs);
-
-    // The main covering rect that applies the mask
-    const backgroundRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    backgroundRect.setAttribute("width", "100%");
-    backgroundRect.setAttribute("height", "100%");
-    backgroundRect.setAttribute("fill", "none");
-    backgroundRect.setAttribute("mask", "url(#svg-mask)");
-
-    svg.appendChild(backgroundRect);
-    document.body.appendChild(svg);
-
-    const updateSVGSize = () => {
-      svg.setAttribute("width", window.innerWidth);
-      svg.setAttribute("height", window.innerHeight);
-      svg.setAttribute("viewBox", `0 0 ${window.innerWidth} ${window.innerHeight}`);
-      whiteRect.setAttribute("width", window.innerWidth - 20);
-      whiteRect.setAttribute("height", window.innerHeight - 20);
-    };
-
-    updateSVGSize();
-    window.addEventListener("resize", updateSVGSize);
-
-    svg._updateSVGSize = updateSVGSize;
-
-  } else if (!show && svgElement) {
-    window.removeEventListener("resize", svgElement._updateSVGSize);
-    document.body.removeChild(svgElement);
-  }
-};
-
-
-function toggleCSSRule(shouldAdd = true) {
-    const styleId = 'dynamic-style';
-    const styleContent = `
-      body::after {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background: red;
-        mask: url("#svg-frame") no-repeat center center / contain no-repeat, linear-gradient(#000 0 0);
-        mask-composite: exclude;
-        mask-size: 10em;
-      }
-    `;
-  
-    // Check if the style element already exists
-    let styleElement = document.getElementById(styleId);
-  
-    if (shouldAdd) {
-      // If the style element doesn't exist, create it
-      if (!styleElement) {
-        styleElement = document.createElement('style');
-        styleElement.id = styleId;
-        document.head.appendChild(styleElement);
-      }
-      // Set the style content
-      styleElement.innerHTML = styleContent;
-    } else {
-      // If the style element exists, remove it
-      if (styleElement) {
-        styleElement.remove();
-      }
-    }
-  }
-  
-  // Example usage:
-  // Add the CSS rule
-
-// Usage
-createSVGFrame(true); // To show the SVG
-let rotateInterval;
-
-function controlGradient(shouldShow = true) {
-  const bodyAfter = document.querySelector('.ai-animation');
-
-  if (shouldShow) {
-    bodyAfter.style.setProperty('--angle', '0deg');
-    bodyAfter.style.setProperty('opacity', '1');
-
-    let currentAngle = 0;
-    clearInterval(rotateInterval);
-
-    rotateInterval = setInterval(() => {
-      currentAngle += 1;
-      if (currentAngle >= 350) {
-        currentAngle = 0;
-      }
-      bodyAfter.style.setProperty('--angle', currentAngle + 'deg');
-    }, 16); // about 60fps = 1000ms/60 ≈ 16ms
-  } else {
-    clearInterval(rotateInterval);
-    bodyAfter.style.setProperty('opacity', '0');
-  }
-}
-
-controlGradient(true);
-
