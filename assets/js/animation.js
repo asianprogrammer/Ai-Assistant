@@ -149,11 +149,46 @@ let AI_COLOR_ANIMTION = document.querySelector(".ai-animation");
 AI_BUTTTON.addEventListener("click", ()=> {
   createSVGFrame(true);
   controlGradient(true)
+  animateGradient(2000, 2000);
   AI_COLOR_ANIMTION.classList.remove("off")
   let x = setTimeout(()=>{
     controlGradient(false)
     createSVGFrame(false);
     AI_COLOR_ANIMTION.classList.add("off")
     clearTimeout(x)
-  }, 3000)
+  }, 2000)
 })
+
+const overlay = document.querySelector('.gradient-overlay');
+
+
+function animateGradient(duration = 4000, maxOffset = 4000) {
+  let startTime = null;
+
+  function step(timestamp) {
+    if (startTime === null) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    overlay.style.display = 'block';
+
+    // progress ∈ [0,1]
+    const progress = Math.min(elapsed / duration, 1);
+
+    // offset moves from -maxOffset → +maxOffset
+    const offset = -maxOffset + progress * (2 * maxOffset);
+
+    // apply to CSS variables
+    overlay.style.setProperty('--cx', `${offset}%`);
+    overlay.style.setProperty('--cy', `${offset}%`);
+
+    // continue until duration is reached
+    if (elapsed < duration) {
+      requestAnimationFrame(step);       // runs ~60 fps
+    }
+
+    if(progress === 1){
+      overlay.style.display = 'none';
+    }
+  }
+
+  requestAnimationFrame(step);
+}

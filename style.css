@@ -691,15 +691,16 @@ footer .icon {
   position: absolute;
 }
 
-.rays {
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 95vh;
+.gradient-overlay {
   position: fixed;
+  inset: 0;
+  z-index: 111111111;
   pointer-events: none;
-  z-index: 11111111111111;
-  background: url(./assets/images/ray1.png) no-repeat;
-  background-size: contain;
-  background-position: bottom top;
+  background: radial-gradient(
+    circle at var(--cx, 50%) var(--cy, 50%),
+    #ff9a9d8f,
+    #ec11ab60,
+    transparent
+  );
+  display: none;
 }
