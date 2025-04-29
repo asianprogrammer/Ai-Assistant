@@ -91,6 +91,7 @@ body:hover::before {
   transparent, 
   transparent, 
   transparent);
+  pointer-events: none;
 }
 
 @keyframes moveColor {
