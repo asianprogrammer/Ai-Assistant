@@ -27,7 +27,6 @@ body {
   background-color: #16161f;
   margin: 2em;
   z-index: 1;
-  /* filter: url(#waveFilter); */
 }
 
 .ai-animation::after {
@@ -55,9 +54,56 @@ body {
           mask-composite: exclude;
   -webkit-animation: spinConic .5s linear infinite;
           animation: spinConic .5s linear infinite;
-  -webkit-transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-  -o-transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: background .3s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: background .3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background .3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body::before {
+  bottom: 0;
+  left: 0;
+  content: '';
+  height: 0%;
+  width: 100%;
+  position: absolute;
+  z-index: 111111;
+  height: 0%;
+  background: radial-gradient(circle at 50% 200%, 
+  rgba(240, 184, 62, 0.6), 
+  rgba(228, 52, 86, 0.6), 
+  rgba(160, 53, 207, 0.6), 
+  rgba(241, 185, 62, 0.6), 
+  rgba(115, 53, 242, 0.6), 
+  transparent, 
+  transparent, 
+  transparent);
+  transition: all .3s ease-in-out;
+  animation: moveColor .3s linear forwards;
+}
+
+body:hover::before {
+  background: radial-gradient(circle at 50% 0%, 
+  rgba(240, 184, 62, 0.6), 
+  rgba(228, 52, 86, 0.6), 
+  rgba(160, 53, 207, 0.6), 
+  rgba(241, 185, 62, 0.6), 
+  rgba(115, 53, 242, 0.6), 
+  transparent, 
+  transparent, 
+  transparent);
+}
+
+@keyframes moveColor {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+.ai-animation.off {
+  display: none;
 }
 
 .ai-animation {
@@ -271,12 +317,14 @@ article {
 
 .animation {
   opacity: 0;
-  width: -webkit-max-content;
+  /* width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   height: -webkit-max-content;
   height: -moz-max-content;
-  height: max-content;
+  height: max-content; */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  overflow: hidden;
   -webkit-transform: rotate(20deg);
       -ms-transform: rotate(20deg);
           transform: rotate(20deg);
@@ -326,7 +374,6 @@ article h1 {
   width: 100%;
   position: relative;
   display: inline-block;
-  overflow: hidden;
 }
 
 article p {

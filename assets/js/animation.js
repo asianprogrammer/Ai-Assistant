@@ -142,3 +142,18 @@ document.addEventListener("DOMContentLoaded", () => {
   animate(".moveAnimation", "moveAnimation");
   animateR("#social", "randomFade");
 })
+
+let AI_BUTTTON = document.querySelector(".ai-button");
+let AI_COLOR_ANIMTION = document.querySelector(".ai-animation");
+
+AI_BUTTTON.addEventListener("click", ()=> {
+  createSVGFrame(true);
+  controlGradient(true)
+  AI_COLOR_ANIMTION.classList.remove("off")
+  let x = setTimeout(()=>{
+    controlGradient(false)
+    createSVGFrame(false);
+    AI_COLOR_ANIMTION.classList.add("off")
+    clearTimeout(x)
+  }, 3000)
+})
