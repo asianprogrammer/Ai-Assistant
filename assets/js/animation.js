@@ -159,6 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
 let AI_BUTTTON = document.querySelector(".ai-button");
 let AI_COLOR_ANIMTION = document.querySelector(".ai-animation");
 let EFFECT = document.querySelector(".next-lv");
+let AI_SOUND = new Audio()
+AI_SOUND.src = './assets/sounds/ai.mp3';
+
 
 AI_BUTTTON.addEventListener("click", () => {
   createSVGFrame(true);
@@ -171,9 +174,13 @@ AI_BUTTTON.addEventListener("click", () => {
   // }, 2000);
 
   if(window.innerWidth <  700) {
-    animateGradient(1000, 1000, -1);
+    AI_SOUND.play()
+    animateGradient(900, 900, -1);
   }else {
-    animateGradient(1000, 1000);
+    animateGradient(2000, 2000);
+    let x = setTimeout(()=> {
+      AI_SOUND.play()
+    }, 1000)
   }
 
   AI_COLOR_ANIMTION.classList.remove("off");
