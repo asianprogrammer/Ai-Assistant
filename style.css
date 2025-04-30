@@ -220,6 +220,11 @@ main {
   border-top-left-radius: 170px;
 }
 
+.mobile-svg {
+  display: none;
+  pointer-events: none;
+}
+
 .svg {
   left: 0;
   width: 8em;
@@ -799,10 +804,7 @@ footer .icon {
   .gradient-overlay {
     width: 100%;
     height: 100%;
-    /* display: block !important; */
     background: radial-gradient(circle at var(--cx) var(--cy), #ff9a9d8f, #ec11ab60, transparent) !important;
-    /* background: radial-gradient(circle at 50% 100%, #ff9a9d8f, #ec11ab60, transparent) !important; */
-
   }
 
   div,
@@ -819,6 +821,122 @@ footer .icon {
     cursor: default !important;
     text-decoration: none;
   }
+
+  body {
+    margin: 0.5em;
+  }
+
+  .svg {
+    top: auto;
+    left: auto;
+    right: 0;
+    bottom: 0 !important;
+    transform: rotate(180deg);
+  }
+
+  .mobile-svg {
+    top: -0.5px;
+    left: 50%;
+    width: 90%;
+    overflow: hidden;
+    max-width: 200px;
+    display: inline-block;
+    position: absolute;
+    transform: translateX(-50%);
+  }
+
+  [toText] {
+    display: block !important;
+  }
+  
+  [toText]::after {
+    top: 2.8em;
+    height: fit-content;
+    position: absolute;
+  }
+
+  [toText]::before {
+    top: 2em;
+    position: absolute;
+    transform: rotate(180deg) !important;
+  }
+
+  .mobile-svg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  footer {
+    left: 50%;
+    top: 0.2em;
+    width: 90%;
+    max-width: 150px;
+    transform: translateX(-50%);
+  }
+
+  footer p {
+    display: none !important;
+  }
+  
+  main {
+    height: 97vh;
+  }
+
+  .main,
+  .main::before {
+    border-bottom-right-radius: 120px;
+    border-top-left-radius: 60px !important;
+  }
+
+  .ai-button {
+    top: auto;
+    left: auto;
+    right: 0;
+    bottom: 0;
+  }
+
+  .image {
+    bottom: -10em;
+    width: 100% !important;
+    height: 90vh !important;
+  }
+
+  .image-container,
+  .image,
+  .image-container .image img {
+    pointer-events: none !important;
+  }
+
+  article {
+    top: 20%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .main-info {
+    font-size: 1.1em !important;
+    margin-bottom: 0.1em;
+  }
+
+  .connect .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  article h1 {
+    width: 100%;
+    font-size: 2.5em;
+    text-align: center;
+  }
+  
+  .target-line {
+    display: none;
+  }
+
 }
 
 @media only screen and (max-width: 1200px) {}
