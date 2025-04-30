@@ -968,26 +968,3 @@ footer .icon {
   }
 
 }
-
-@media only screen and (max-width: 1200px) {}
-
-.next-lv {
-  top: -200%;
-  left: -200%;
-  width: 50%;
-  height: 400vh;
-  position: fixed;
-  z-index: 1111111111;
-  background: radial-gradient(circle, rgba(242, 192, 10, 0.48) 10%, rgba(255, 0, 111, 0.41) 40%, transparent 100%);
-  transform: skewX(-13deg);
-  filter: blur(35px);
-  transition: none;
-}
-
-.next-lv.on {
-  left: 400%;
-  width: 200%;
-  top: 10%;
-  transition: all 1s ease-in-out;
-  transform: skewX(-30deg);
-}
