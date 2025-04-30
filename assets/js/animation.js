@@ -172,7 +172,7 @@ AI_BUTTTON.addEventListener("click", () => {
   //   clearTimeout(time);
   // }, 2000);
 
-  if (window.innerWidth < 700) {
+  if (window.innerWidth <= 768) {
     animateGradient(900, 900, -1);
     let x = setTimeout(() => {
       AI_SOUND.play();
@@ -241,3 +241,14 @@ function animateGradient(d = 5000, m = 4000, dir = 1) {
   id = requestAnimationFrame(step);
   return () => id && cancelAnimationFrame(id);
 }
+
+// Sounds effects
+const BASH_URL = './assets/sounds/'
+const audio = new Audio()
+const anime = document.querySelector("#imageAnime");
+
+anime.addEventListener('click', function(){
+  audio.src = `${BASH_URL+Math.floor(Math.random() * 4)}.mp3`
+  audio.play()
+  console.log(`${BASH_URL+Math.floor(Math.random() * 4)}.mp3`)
+})
