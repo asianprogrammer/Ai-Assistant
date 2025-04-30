@@ -159,9 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
 let AI_BUTTTON = document.querySelector(".ai-button");
 let AI_COLOR_ANIMTION = document.querySelector(".ai-animation");
 let EFFECT = document.querySelector(".next-lv");
-let AI_SOUND = new Audio()
-AI_SOUND.src = './assets/sounds/ai.mp3';
-
+let AI_SOUND = new Audio();
+AI_SOUND.src = "./assets/sounds/ai.mp3";
 
 AI_BUTTTON.addEventListener("click", () => {
   createSVGFrame(true);
@@ -173,18 +172,18 @@ AI_BUTTTON.addEventListener("click", () => {
   //   clearTimeout(time);
   // }, 2000);
 
-  if(window.innerWidth <  700) {
+  if (window.innerWidth < 700) {
     animateGradient(900, 900, -1);
-    let x = setTimeout(()=> {
-      AI_SOUND.play()
-      clearTimeout(x)
-    }, 100)
-  }else {
+    let x = setTimeout(() => {
+      AI_SOUND.play();
+      clearTimeout(x);
+    }, 100);
+  } else {
     animateGradient(2000, 2000);
-    let x = setTimeout(()=> {
-      AI_SOUND.play()
-      clearTimeout(x)
-    }, 1000)
+    let x = setTimeout(() => {
+      AI_SOUND.play();
+      clearTimeout(x);
+    }, 1000);
   }
 
   AI_COLOR_ANIMTION.classList.remove("off");
@@ -198,26 +197,70 @@ AI_BUTTTON.addEventListener("click", () => {
 
 const overlay = document.querySelector(".gradient-overlay");
 
-function animateGradient(duration = 6000, maxOffset = 4000, direction = 1) {
+function animateGradient(
+  duration = 5000,
+  maxOffset = 4000,
+  direction = 1,
+  fps = "auto"
+) {
   overlay.style.display = "block";
-  let startTime = null;
 
-  function step(timestamp) {
-    if (startTime === null) startTime = timestamp;
-    const elapsed = timestamp - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const offset = -maxOffset + progress * (2 * maxOffset);
-    const value = `${direction * offset}%`;
-  
-    overlay.style.setProperty("--cx", value);
-    overlay.style.setProperty("--cy", value);
+  const isLowEndDevice =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ) &&
+    (screen.width < 768 || navigator.deviceMemory < 2);
 
-    if (elapsed < duration) {
-      requestAnimationFrame(step);
-    } else {
-      overlay.style.display = "none";
-    }
+  if (fps === "auto") {
+    fps = isLowEndDevice ? 15 : 60;
   }
 
-  requestAnimationFrame(step);
+  // Convert fps to number
+  fps = Number(fps) || 60;
+
+  // Lower fps for very low-end devices
+  if (isLowEndDevice && fps > 30) {
+    fps = Math.min(fps, 30);
+  }
+
+  const frameInterval = 1000 / fps;
+  let startTime = 0;
+  let lastFrame = 0;
+  let rafId = null;
+
+  function updateGradient(progress) {
+    const offset = direction * (-maxOffset + progress * (maxOffset * 2)) + "%";
+    overlay.style.setProperty("--cx", offset);
+    overlay.style.setProperty("--cy", offset);
+  }
+
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const timeSinceLastFrame = timestamp - lastFrame;
+
+    if (timeSinceLastFrame >= frameInterval || elapsed >= duration) {
+      lastFrame = timestamp;
+      const progress = elapsed / duration;
+
+      if (progress < 1) {
+        updateGradient(progress);
+        rafId = requestAnimationFrame(step);
+      } else {
+        updateGradient(1);
+        overlay.style.display = "none";
+        rafId = null;
+      }
+    } else {
+      rafId = requestAnimationFrame(step);
+    }
+  }
+  rafId = requestAnimationFrame(step);
+
+  return function stopAnimation() {
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  };
 }
