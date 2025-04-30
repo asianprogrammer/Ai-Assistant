@@ -242,13 +242,33 @@ function animateGradient(d = 5000, m = 4000, dir = 1) {
   return () => id && cancelAnimationFrame(id);
 }
 
+const makeUniqueGen = max => {
+  let pool = Array.from({length: max}, (_,i) => i + 1), i = 0;
+  const shuffle = () => {
+    const r = new Uint32Array(1);
+    for (let j = pool.length - 1; j > 0; j--) {
+      crypto.getRandomValues(r);
+      const k = r[0] % (j + 1);
+      [pool[j], pool[k]] = [pool[k], pool[j]];
+    }
+    i = 0;
+  };
+  return () => {
+    if (i >= pool.length) shuffle();
+    return pool[i++] === 1 && i === 1 ? 1 : pool[i - 1];
+  };
+};
+
 // Sounds effects
 const BASH_URL = './assets/sounds/'
 const audio = new Audio()
 const anime = document.querySelector("#imageAnime");
 
+function Rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 anime.addEventListener('click', function(){
-  audio.src = `${BASH_URL+Math.floor(Math.random() * 4)}.mp3`
+  audio.src = `${BASH_URL+Rand(0, 2)}.mp3`
   audio.play()
-  console.log(`${BASH_URL+Math.floor(Math.random() * 4)}.mp3`)
+  console.log(`${BASH_URL+Rand(0, 2)}.mp3`)
 })
