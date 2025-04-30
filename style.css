@@ -520,11 +520,6 @@ footer {
   margin-bottom: 0.5em;
 }
 
-.social-icons a:hover .icon {
-  transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform: skewY(30deg);
-}
-
 footer a {
   margin-left: -3em;
   opacity: 0;
@@ -837,12 +832,21 @@ footer .icon {
   .mobile-svg {
     top: -0.5px;
     left: 50%;
-    width: 90%;
+    width: 100%;
     overflow: hidden;
     max-width: 200px;
     display: inline-block;
     position: absolute;
     transform: translateX(-50%);
+  }
+
+  .social-icons .icon {
+    width: 25px;
+    height: 25px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   [toText] {
@@ -857,6 +861,7 @@ footer .icon {
 
   [toText]::before {
     top: 2em;
+    left: 10px;
     position: absolute;
     transform: rotate(180deg) !important;
   }
@@ -870,8 +875,12 @@ footer .icon {
   footer {
     left: 50%;
     top: 0.2em;
-    width: 90%;
+    bottom: auto;
+    width: 100%;
     max-width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     transform: translateX(-50%);
   }
 
