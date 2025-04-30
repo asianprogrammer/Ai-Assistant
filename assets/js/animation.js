@@ -260,15 +260,16 @@ const makeUniqueGen = max => {
 };
 
 // Sounds effects
-const BASH_URL = './assets/sounds/'
 const audio = new Audio()
+const AUDIO_URL = './assets/sounds/'
 const anime = document.querySelector("#imageAnime");
 
-function Rand(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+let track_rand = -1;
+function Rand(max) {
+  return track_rand = (track_rand + 1) % max;
 }
+
 anime.addEventListener('click', function(){
-  audio.src = `${BASH_URL+Rand(0, 2)}.mp3`
+  audio.src = `${AUDIO_URL+Rand(3)}.mp3`
   audio.play()
-  console.log(`${BASH_URL+Rand(0, 2)}.mp3`)
 })

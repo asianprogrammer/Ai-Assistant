@@ -246,11 +246,11 @@ main {
   top: -0.5em;
   height: 2em;
   padding: 1em;
-  z-index: 9999;
   cursor: pointer;
   overflow: hidden;
   border-radius: 50%;
   position: absolute;
+  z-index: 111111111;
   background: rgba(115, 0, 255, 0.424);
 }
 
@@ -921,12 +921,6 @@ footer .icon {
     bottom: -10em;
     width: 100% !important;
     height: 90vh !important;
-  }
-
-  .image-container,
-  .image,
-  .image-container .image img {
-    pointer-events: none !important;
   }
 
   article {
