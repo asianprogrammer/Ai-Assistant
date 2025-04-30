@@ -174,12 +174,16 @@ AI_BUTTTON.addEventListener("click", () => {
   // }, 2000);
 
   if(window.innerWidth <  700) {
-    AI_SOUND.play()
     animateGradient(900, 900, -1);
+    let x = setTimeout(()=> {
+      AI_SOUND.play()
+      clearTimeout(x)
+    }, 100)
   }else {
     animateGradient(2000, 2000);
     let x = setTimeout(()=> {
       AI_SOUND.play()
+      clearTimeout(x)
     }, 1000)
   }
 
