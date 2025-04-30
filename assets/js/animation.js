@@ -266,6 +266,7 @@ const anime = document.querySelector("#imageAnime");
 
 let track_rand = -1;
 function Rand(max) {
+  return Math.floor(Math.random() * max)
   return track_rand = (track_rand + 1) % max;
 }
 
