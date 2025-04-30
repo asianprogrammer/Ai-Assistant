@@ -841,6 +841,7 @@ footer .icon {
     max-width: 200px;
     display: inline-block;
     position: absolute;
+    z-index: 1111;
     transform: translateX(-50%);
   }
 
@@ -905,8 +906,8 @@ footer .icon {
   .ai-button {
     top: auto;
     left: auto;
-    right: 0;
-    bottom: 0;
+    right: 0.5em;
+    bottom: -0.5em;
   }
 
   .image {
