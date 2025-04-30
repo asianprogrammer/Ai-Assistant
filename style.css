@@ -829,6 +829,7 @@ footer .icon {
     top: auto;
     left: auto;
     right: 0;
+    width: 7em;
     bottom: 0 !important;
     transform: rotate(180deg);
   }
@@ -845,13 +846,21 @@ footer .icon {
     transform: translateX(-50%);
   }
 
+  .social-icons {
+    width: 90%;
+    margin-left: 5%;
+  }
+
   .social-icons .icon {
     width: 25px;
     height: 25px;
+  }
+
+  .social-icons a {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   [toText] {
@@ -883,9 +892,6 @@ footer .icon {
     bottom: auto;
     width: 100%;
     max-width: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     transform: translateX(-50%);
   }
 
@@ -906,8 +912,10 @@ footer .icon {
   .ai-button {
     top: auto;
     left: auto;
-    right: 0.5em;
-    bottom: -0.5em;
+    width: 1.5em;
+    height: 1.5em;
+    right: 0.6em;
+    bottom: 0em;
   }
 
   .image {
@@ -924,6 +932,7 @@ footer .icon {
 
   article {
     top: 20%;
+    left: 0;
     display: flex;
     text-align: center;
     align-items: center;
@@ -932,8 +941,14 @@ footer .icon {
   }
 
   .main-info {
-    font-size: 1.1em !important;
+    font-size: 0.9em !important;
     margin-bottom: 0.1em;
+  }
+
+  .connect {
+    font-size: 1em;
+    padding: 0.2em 0;
+    height: fit-content;
   }
 
   .connect .icon {
@@ -946,7 +961,7 @@ footer .icon {
     font-size: 2.5em;
     text-align: center;
   }
-  
+
   .target-line {
     display: none;
   }

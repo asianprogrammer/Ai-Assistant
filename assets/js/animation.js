@@ -211,50 +211,35 @@ function animateGradient(
     ) &&
     (screen.width < 768 || navigator.deviceMemory < 2);
 
-  if (fps === "auto") {
-    fps = isLowEndDevice ? 15 : 60;
-  }
-
-  // Convert fps to number
-  fps = Number(fps) || 60;
-
-  // Lower fps for very low-end devices
-  if (isLowEndDevice && fps > 30) {
-    fps = Math.min(fps, 30);
-  }
+  fps = fps === "auto" ? (isLowEndDevice ? 15 : 60) : Number(fps) || 60;
+  fps = isLowEndDevice && fps > 30 ? 30 : fps;
 
   const frameInterval = 1000 / fps;
   let startTime = 0;
   let lastFrame = 0;
   let rafId = null;
 
-  function updateGradient(progress) {
-    const offset = direction * (-maxOffset + progress * (maxOffset * 2)) + "%";
-    overlay.style.setProperty("--cx", offset);
-    overlay.style.setProperty("--cy", offset);
-  }
-
   function step(timestamp) {
-    if (!startTime) startTime = timestamp;
+    startTime = startTime || timestamp;
     const elapsed = timestamp - startTime;
     const timeSinceLastFrame = timestamp - lastFrame;
-
-    if (timeSinceLastFrame >= frameInterval || elapsed >= duration) {
+    const shouldRender = timeSinceLastFrame >= frameInterval || elapsed >= duration;
+    
+    if (shouldRender) {
       lastFrame = timestamp;
-      const progress = elapsed / duration;
-
-      if (progress < 1) {
-        updateGradient(progress);
-        rafId = requestAnimationFrame(step);
-      } else {
-        updateGradient(1);
-        overlay.style.display = "none";
-        rafId = null;
-      }
+      const progress = Math.min(elapsed / duration, 1);
+      const offset = direction * (-maxOffset + progress * (maxOffset * 2)) + "%";
+      
+      overlay.style.setProperty("--cx", offset);
+      overlay.style.setProperty("--cy", offset);
+      
+      overlay.style.display = progress >= 1 ? "none" : "block";
+      rafId = progress < 1 ? requestAnimationFrame(step) : null;
     } else {
       rafId = requestAnimationFrame(step);
     }
   }
+  
   rafId = requestAnimationFrame(step);
 
   return function stopAnimation() {
