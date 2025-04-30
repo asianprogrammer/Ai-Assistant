@@ -933,6 +933,7 @@ footer .icon {
   article {
     top: 20%;
     left: 0;
+    width: 100%;
     display: flex;
     text-align: center;
     align-items: center;

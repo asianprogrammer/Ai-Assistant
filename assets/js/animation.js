@@ -197,55 +197,43 @@ AI_BUTTTON.addEventListener("click", () => {
 
 const overlay = document.querySelector(".gradient-overlay");
 
-function animateGradient(
-  duration = 5000,
-  maxOffset = 4000,
-  direction = 1,
-  fps = "auto"
-) {
-  overlay.style.display = "block";
-
-  const isLowEndDevice =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ) &&
-    (screen.width < 768 || navigator.deviceMemory < 2);
-
-  fps = fps === "auto" ? (isLowEndDevice ? 15 : 60) : Number(fps) || 60;
-  fps = isLowEndDevice && fps > 30 ? 30 : fps;
-
-  const frameInterval = 1000 / fps;
-  let startTime = 0;
-  let lastFrame = 0;
-  let rafId = null;
-
-  function step(timestamp) {
-    startTime = startTime || timestamp;
-    const elapsed = timestamp - startTime;
-    const timeSinceLastFrame = timestamp - lastFrame;
-    const shouldRender = timeSinceLastFrame >= frameInterval || elapsed >= duration;
-    
-    if (shouldRender) {
-      lastFrame = timestamp;
-      const progress = Math.min(elapsed / duration, 1);
-      const offset = direction * (-maxOffset + progress * (maxOffset * 2)) + "%";
-      
-      overlay.style.setProperty("--cx", offset);
-      overlay.style.setProperty("--cy", offset);
-      
-      overlay.style.display = progress >= 1 ? "none" : "block";
-      rafId = progress < 1 ? requestAnimationFrame(step) : null;
-    } else {
-      rafId = requestAnimationFrame(step);
-    }
+const isLowEndDevice = (() => {
+  const ua = navigator.userAgent;
+  const lowUa = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+  return lowUa.test(ua) && (screen.width < 768 || navigator.deviceMemory < 2);
+})();
+let _cachedFps = 60;
+(function(probes = 10) {
+  let count = 0, startTs = 0, lastTs = 0, total = 0;
+  function step(ts) {
+    if (!startTs) startTs = lastTs = ts;
+    else { total += ts - lastTs; lastTs = ts; count++; }
+    if (count < probes) requestAnimationFrame(step);
+    else _cachedFps = Math.round(1000 / (total / count));
   }
-  
-  rafId = requestAnimationFrame(step);
+  requestAnimationFrame(step);
+})();
 
-  return function stopAnimation() {
-    if (rafId) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
+function FPS() { return _cachedFps; }
+
+function animateGradient(d = 5000, m = 4000, dir = 1) {
+  const fps = isLowEndDevice ? Math.min(FPS(), 30) : FPS();
+  const interval = 1000 / fps;
+  overlay.style.display = "block";
+  let start = 0, last = 0, id;
+  function step(ts) {
+    if (!start) start = ts;
+    const e = ts - start, Δ = ts - last;
+    if (Δ >= interval || e >= d) {
+      last = ts;
+      const t = e >= d ? 1 : e / d;
+      const v = dir * (-m + 2 * m * t) + "%";
+      overlay.style.setProperty("--cx", v);
+      overlay.style.setProperty("--cy", v);
+      if (t === 1) { overlay.style.display = "none"; return; }
     }
-  };
+    id = requestAnimationFrame(step);
+  }
+  id = requestAnimationFrame(step);
+  return () => cancelAnimationFrame(id);
 }
