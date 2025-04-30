@@ -197,43 +197,47 @@ AI_BUTTTON.addEventListener("click", () => {
 
 const overlay = document.querySelector(".gradient-overlay");
 
-const isLowEndDevice = (() => {
-  const ua = navigator.userAgent;
-  const lowUa = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-  return lowUa.test(ua) && (screen.width < 768 || navigator.deviceMemory < 2);
-})();
-let _cachedFps = 60;
-(function(probes = 10) {
-  let count = 0, startTs = 0, lastTs = 0, total = 0;
-  function step(ts) {
-    if (!startTs) startTs = lastTs = ts;
-    else { total += ts - lastTs; lastTs = ts; count++; }
-    if (count < probes) requestAnimationFrame(step);
-    else _cachedFps = Math.round(1000 / (total / count));
-  }
-  requestAnimationFrame(step);
-})();
 
-function FPS() { return _cachedFps; }
+const isLowEnd = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && 
+  (screen.width < 768 || navigator.deviceMemory < 2);
+
+let _fps = 60;
+(function() {
+  let c = 0, s = 0, l = 0, t = 0;
+  function m(ts) {
+    if (!s) s = l = ts;
+    else { t += ts - l; l = ts; c++; }
+    if (c < 10) requestAnimationFrame(m);
+    else _fps = Math.round(1000 / (t / c));
+  }
+  requestAnimationFrame(m);
+})();
 
 function animateGradient(d = 5000, m = 4000, dir = 1) {
-  const fps = isLowEndDevice ? Math.min(FPS(), 30) : FPS();
-  const interval = 1000 / fps;
+  const fps = isLowEnd ? Math.min(_fps, 30) : _fps;
+  const i = 1000 / fps;
   overlay.style.display = "block";
-  let start = 0, last = 0, id;
+  let s = 0, l = 0, id;
+
   function step(ts) {
-    if (!start) start = ts;
-    const e = ts - start, Δ = ts - last;
-    if (Δ >= interval || e >= d) {
-      last = ts;
-      const t = e >= d ? 1 : e / d;
-      const v = dir * (-m + 2 * m * t) + "%";
+    s = s || ts;
+    const e = ts - s, dt = ts - l;
+
+    if (dt >= i || e >= d) {
+      l = ts;
+      const p = e >= d ? 1 : e / d;
+      const v = dir * (-m + 2 * m * p) + "%";
       overlay.style.setProperty("--cx", v);
       overlay.style.setProperty("--cy", v);
-      if (t === 1) { overlay.style.display = "none"; return; }
+      
+      if (p >= 1) {
+        overlay.style.display = "none";
+        return;
+      }
     }
     id = requestAnimationFrame(step);
   }
+  
   id = requestAnimationFrame(step);
-  return () => cancelAnimationFrame(id);
+  return () => id && cancelAnimationFrame(id);
 }
