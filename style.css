@@ -127,7 +127,6 @@ body {
   -webkit-transition: all 3s ease-in-out;
   -o-transition: all 3s ease-in-out;
   transition: all 3s ease-in-out;
-  /* clip-path: polygon(0 90%, 100% 90%, 100% 100%, 0% 100%); */
 }
 
 @-webkit-keyframes scaleDown {
@@ -795,6 +794,15 @@ footer .icon {
   .gradient-overlay {
     --cx: 4000%;
     --cy: 4000%;
+  }
+
+  .gradient-overlay {
+    width: 100%;
+    height: 100%;
+    /* display: block !important; */
+    background: radial-gradient(circle at var(--cx) var(--cy), #ff9a9d8f, #ec11ab60, transparent) !important;
+    /* background: radial-gradient(circle at 50% 100%, #ff9a9d8f, #ec11ab60, transparent) !important; */
+
   }
 
   div,
