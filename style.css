@@ -22,6 +22,7 @@ img {
   padding: 0;
 }
 
+
 body {
   font-family: Inter;
   background-color: #16161f;
@@ -104,6 +105,7 @@ body {
 }
 
 .ai-animation.off {
+  transform: scale(2);
   display: none;
 }
 
@@ -506,6 +508,11 @@ footer {
   margin-bottom: 0.5em;
 }
 
+.social-icons a:hover .icon {
+  transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: skewY(30deg);
+}
+
 footer a {
   margin-left: -3em;
   opacity: 0;
@@ -705,11 +712,29 @@ footer .icon {
   display: none;
 }
 
-@media only screen and (max-width: 600px)  {
+@media only screen and (max-width: 768px)  {
   .gradient-overlay {
     --cx: 4000%;
     --cy: 4000%;
   }
+  div,
+h1,
+p,
+a,
+span,
+footer,
+article,
+main,
+section,
+header,
+img {
+  cursor: default !important;
+  text-decoration: none;
+}
+}
+
+@media only screen and (max-width: 1200px) {
+  
 }
 
 .next-lv {

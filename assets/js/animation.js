@@ -182,7 +182,7 @@ AI_BUTTTON.addEventListener("click", () => {
 
 const overlay = document.querySelector(".gradient-overlay");
 
-function animateGradient(duration = 4000, maxOffset = 4000) {
+function animateGradient(duration = 6000, maxOffset = 4000) {
   let startTime = null;
 
   function step(timestamp) {
