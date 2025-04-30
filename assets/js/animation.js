@@ -170,8 +170,13 @@ AI_BUTTTON.addEventListener("click", () => {
   //   clearTimeout(time);
   // }, 2000);
 
+  if(window.innerWidth <  700) {
+    animateGradient(1000, 1000, -1);
+  }else {
+    animateGradient(1000, 1000);
+  }
+
   AI_COLOR_ANIMTION.classList.remove("off");
-  animateGradient(2000, 2000);
   let x = setTimeout(() => {
     controlGradient(false);
     createSVGFrame(false);
@@ -182,35 +187,23 @@ AI_BUTTTON.addEventListener("click", () => {
 
 const overlay = document.querySelector(".gradient-overlay");
 
-function animateGradient(duration = 6000, maxOffset = 4000) {
+function animateGradient(duration = 6000, maxOffset = 4000, direction = 1) {
+  overlay.style.display = "block";
   let startTime = null;
 
   function step(timestamp) {
     if (startTime === null) startTime = timestamp;
     const elapsed = timestamp - startTime;
-    overlay.style.display = "block";
-
-    // progress ∈ [0,1]
     const progress = Math.min(elapsed / duration, 1);
-
-    // offset moves from -maxOffset → +maxOffset
     const offset = -maxOffset + progress * (2 * maxOffset);
+    const value = `${direction * offset}%`;
+  
+    overlay.style.setProperty("--cx", value);
+    overlay.style.setProperty("--cy", value);
 
-    // apply to CSS variables
-    if(window.innerWidth <  700) {
-      overlay.style.setProperty("--cx", `${-offset}%`);
-      overlay.style.setProperty("--cy", `${-offset}%`);
-    }else {
-      overlay.style.setProperty("--cx", `${offset}%`);
-      overlay.style.setProperty("--cy", `${offset}%`);
-    }
-
-    // continue until duration is reached
     if (elapsed < duration) {
-      requestAnimationFrame(step); // runs ~60 fps
-    }
-
-    if (progress === 1) {
+      requestAnimationFrame(step);
+    } else {
       overlay.style.display = "none";
     }
   }
