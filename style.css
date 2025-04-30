@@ -821,6 +821,10 @@ footer .icon {
     margin: 0.5em;
   }
 
+  .main::before {
+    background-size: 200%;
+  }
+
   .svg {
     top: auto;
     left: auto;
