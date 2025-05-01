@@ -162,10 +162,6 @@ body {
 }
 
 
-/* .ai-animation:hover {
-  clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0% 100%);
-} */
-
 img {
   -webkit-user-select: none;
   user-select: none;
@@ -720,26 +716,26 @@ footer .icon {
   margin-top: -10px;
   text-align: right;
   position: absolute;
+  opacity: 0;
   clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
-  animation: slowText .6s forwards;
-  animation-delay: 2.5s;
-  mask-image: linear-gradient(to right, transparent 60%, black 90%);
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  transition: all .3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition: clip-path 0.8s ease, opacity 0.8s ease;
 }
 
-@keyframes slowText {
-  0% {
-    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
-    mask-image: linear-gradient(to right, transparent 60%, black 90%);
-  }
+/* Page load animation */
+.target-line .short-text.animate-in {
+  opacity: 1;
+  clip-path: polygon(0% 0, 100% 0, 100% 100%, 0% 100%);
+}
 
-  100% {
-    clip-path: polygon(0% 0, 100% 0, 100% 100%, 0% 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 0%);
-  }
+/* State transitions */
+.target-line .short-text.on {
+  opacity: 1;
+  clip-path: polygon(0% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.target-line .short-text.off {
+  opacity: 0;
+  clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
 }
 
 #line {

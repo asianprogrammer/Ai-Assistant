@@ -158,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let AI_BUTTTON = document.querySelector(".ai-button");
 let AI_COLOR_ANIMTION = document.querySelector(".ai-animation");
-let EFFECT = document.querySelector(".next-lv");
 let AI_SOUND = new Audio();
 AI_SOUND.src = "./assets/sounds/ai.mp3";
 
@@ -166,18 +165,12 @@ AI_BUTTTON.addEventListener("click", () => {
   createSVGFrame(true);
   controlGradient(true);
 
-  // EFFECT.classList.add("on");
-  // let time = setTimeout(() => {
-  //   EFFECT.classList.remove("on");
-  //   clearTimeout(time);
-  // }, 2000);
-
   if (window.innerWidth <= 768) {
     animateGradient(900, 900, -1);
     let x = setTimeout(() => {
       AI_SOUND.play();
       clearTimeout(x);
-    }, 100);
+    }, 300);
   } else {
     animateGradient(2000, 2000);
     let x = setTimeout(() => {
@@ -274,3 +267,32 @@ anime.addEventListener('click', function(){
   audio.src = `${AUDIO_URL+Rand(3)}.mp3`
   audio.play()
 })
+
+var texts = [
+  "Hello, I'm Satsuki, AI assistant",
+  "I'm here to provide detailed information about Parvez Ahmed",
+  "Need assistance? I'm here to help",
+  "Have a question? Click the AI button to ask anything about Parvez Ahmed.",
+  "Feel free to interact— I'm always available to guide you."
+]
+
+let text = document.querySelector('.short-text')
+let inital = true;
+
+function change(){
+  text.classList.remove("on")
+  text.classList.add("off")
+  let x = setTimeout(function(){
+    text.classList.add("on")
+    text.classList.remove("off")
+    text.innerHTML = texts[Rand(texts.length)];
+    clearTimeout(x)
+  }, 1000)
+}
+
+if (window.innerWidth > 768) {
+  setTimeout(() => {
+    change();
+    setInterval(change, 6000);
+  }, 1500);
+}
