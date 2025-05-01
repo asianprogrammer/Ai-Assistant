@@ -236,6 +236,31 @@ main {
   object-fit: contain;
 }
 
+.slide-left {
+  display: none !important;
+}
+
+.ai-button img {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.ai {
+  opacity: 0;
+  filter: blur(5px);
+  pointer-events: none;
+  transform: scale(0) rotate(-180deg);
+  position: absolute !important;
+  transition: all 0.3s cubic-bezier(0,2.08,.83,.67);
+}
+
+.ai.on {
+  opacity: 1;
+  filter: blur(0px);
+  pointer-events: auto;
+  transform: scale(0.5) rotate(0deg);
+}
 .ai-button {
   left: 0.5em;
   width: 2em;
@@ -668,13 +693,22 @@ footer .icon {
 }
 
 .image-container .image {
-  right: 0;
+  left: 60%;
   width: 40%;
-  height: 120vh;
-  margin-top: 0.5em;
+  height: 120%;
+  bottom: -13em;
   position: absolute;
   pointer-events: all;
+  transition: all .4s cubic-bezier(.65,.91,0,.63);
 }
+
+.image-container .image.left {
+  left: -10%;
+  height: 90%;
+  bottom: 2em;
+  transition: all .8s cubic-bezier(.65,.91,0,.63);
+}
+
 
 .image-container .image img {
   width: 100%;
@@ -783,6 +817,12 @@ footer .icon {
       #ec11ab60,
       transparent);
   display: none;
+}
+
+@media only screen and (max-width: 1420px){
+  .target-line {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -914,9 +954,23 @@ footer .icon {
   }
 
   .image {
-    bottom: -10em;
+    left: 0% !important;
+    bottom: -10em !important;
     width: 100% !important;
-    height: 90vh !important;
+    height: 90% !important;
+    transition: all .3s ease !important;
+  }
+
+  .image.left {
+    bottom: -35em !important;
+    left: -25% !important;
+    width: 150% !important;
+    height: 130% !important;
+    transition: all .3s ease !important;
+  }
+
+  .social-icons.slide-left {
+    display: flex !important;
   }
 
   article {

@@ -155,9 +155,46 @@ document.addEventListener("DOMContentLoaded", () => {
   animate(".moveAnimation", "moveAnimation");
   animateR("#social", "randomFade");
 });
+// All elements of slide fucntion
+let headLine = document.getElementById("main-text");
+let details = document.querySelector(".main-info");
+let connect = document.querySelector(".connect");
+let socialIcons = document.querySelector(".social-icons");
+let socialDetails = document.querySelector("#social");
+let targetLine = document.querySelector(".target-line")
+let image = document.getElementById("image")
+let text = document.querySelector('.short-text')
+
+// Slide animation
+function slide(move = true){
+  if(move){
+    headLine.classList.add("slide-left")
+    details.classList.add("slide-left")
+    connect.classList.add("slide-left")
+    socialIcons.classList.add("slide-left")
+    socialDetails.classList.add("slide-left")
+    targetLine.classList.add("slide-left")
+    image.classList.add("left")
+    text.style.display = 'none'
+  }else {
+    headLine.classList.remove("slide-left")
+    details.classList.remove("slide-left")
+    connect.classList.remove("slide-left")
+    socialIcons.classList.remove("slide-left")
+    socialDetails.classList.remove("slide-left")
+    targetLine.classList.remove("slide-left")
+    image.classList.remove("left")
+    let x = setTimeout(()=> {
+      text.style.display = 'block';
+    }, 3000)
+  }
+}
 
 let AI_BUTTTON = document.querySelector(".ai-button");
+let AI_BUTTON_ICON = document.getElementById("ai-path");
 let AI_COLOR_ANIMTION = document.querySelector(".ai-animation");
+let AI_ICONS = document.querySelectorAll(".ai");
+let ai = true;
 let AI_SOUND = new Audio();
 AI_SOUND.src = "./assets/sounds/ai.mp3";
 
@@ -165,27 +202,38 @@ AI_BUTTTON.addEventListener("click", () => {
   createSVGFrame(true);
   controlGradient(true);
 
-  if (window.innerWidth <= 768) {
-    animateGradient(900, 900, -1);
+  if(ai){
+    slide()
+    if (window.innerWidth <= 768) {
+      animateGradient(900, 900, -1);
+      let x = setTimeout(() => {
+        AI_SOUND.play();
+        clearTimeout(x);
+      }, 300);
+    } else {
+      animateGradient(2000, 2000);
+      let x = setTimeout(() => {
+        AI_SOUND.play();
+        clearTimeout(x);
+      }, 1000);
+    }
+  
+    AI_COLOR_ANIMTION.classList.remove("off");
     let x = setTimeout(() => {
-      AI_SOUND.play();
+      controlGradient(false);
+      createSVGFrame(false);
+      AI_COLOR_ANIMTION.classList.add("off");
       clearTimeout(x);
-    }, 300);
-  } else {
-    animateGradient(2000, 2000);
-    let x = setTimeout(() => {
-      AI_SOUND.play();
-      clearTimeout(x);
-    }, 1000);
+    }, 2000);
+    AI_ICONS[0].classList.remove('on')
+    AI_ICONS[1].classList.add('on')
+    ai = false;
+  }else {
+    slide(false)
+    AI_ICONS[0].classList.add('on')
+    AI_ICONS[1].classList.remove('on')
+    ai = true;
   }
-
-  AI_COLOR_ANIMTION.classList.remove("off");
-  let x = setTimeout(() => {
-    controlGradient(false);
-    createSVGFrame(false);
-    AI_COLOR_ANIMTION.classList.add("off");
-    clearTimeout(x);
-  }, 2000);
 });
 
 const overlay = document.querySelector(".gradient-overlay");
@@ -257,6 +305,7 @@ const audio = new Audio()
 const AUDIO_URL = './assets/sounds/'
 const anime = document.querySelector("#imageAnime");
 
+let inital = true;
 let track_rand = -1;
 function Rand(max) {
   return Math.floor(Math.random() * max)
@@ -272,12 +321,9 @@ var texts = [
   "Hello, I'm Satsuki, AI assistant",
   "I'm here to provide detailed information about Parvez Ahmed",
   "Need assistance? I'm here to help",
-  "Have a question? Click the AI button to ask anything about Parvez Ahmed.",
-  "Feel free to interact— I'm always available to guide you."
+  "Have a question? Click the AI button to ask anything about Parvez",
+  "Feel free to interact— I'm always available to guide you",
 ]
-
-let text = document.querySelector('.short-text')
-let inital = true;
 
 function change(){
   text.classList.remove("on")
@@ -290,9 +336,10 @@ function change(){
   }, 1000)
 }
 
-if (window.innerWidth > 768) {
+if (window.innerWidth > 1420) {
   setTimeout(() => {
-    change();
+    text.classList.add("on")
+    text.classList.remove("off")
     setInterval(change, 6000);
-  }, 1500);
+  }, 2000);
 }
