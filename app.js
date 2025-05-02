@@ -1,9 +1,3 @@
-function NativeUI() {
-  if (input.value.trim()) {
-    chatToVoice(input.value);
-  }
-}
-
 function enjection(arg, name, url){
   if(arg){
     SHORTCUTS.innerHTML = `
@@ -41,7 +35,6 @@ const commands = [
     keywords: ["/msg", "/messanger"]
   }
 ];
-
 
 function search(input) {
   const cleaned = input.toLowerCase();
@@ -100,6 +93,7 @@ function openUI(){
   }
 }
 
+// On key press handle function
 prompt.addEventListener('keyup', function(e){
   if(e.key === "Enter"){
     openUI()
@@ -108,7 +102,9 @@ prompt.addEventListener('keyup', function(e){
       shaking()
     }else {
       AI_GEN()
-      console.log(chat(e.target.value.trim()))
+      chat(prompt.value.trim().value).then(e=> {
+        console.log(e)
+      })
       e.target.value = '';
     }
   }
@@ -137,12 +133,15 @@ prompt.addEventListener('keyup', function(e){
 
 })
 
+// On button click heandle fucntion
 sendPrompt.addEventListener('click', function(){
   if(prompt.value.trim().length < 2){
     shaking()
   }else {
     AI_GEN()
-    console.log(chat(prompt.value.trim().value))
+    chat(prompt.value.trim().value).then(e=> {
+      console.log(e)
+    })
   }
   prompt.value = '';
 })
@@ -174,9 +173,6 @@ function chat(prompt) {
     });
 }
 
-chat("hi").then(e => {
-  console.log("Outside Call:", e.response);
-});
 
 function playAiVoice(text) {
   fetch("/.netlify/functions/voice", {
