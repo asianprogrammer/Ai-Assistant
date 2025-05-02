@@ -164,6 +164,7 @@ let socialDetails = document.querySelector("#social");
 let targetLine = document.querySelector(".target-line")
 let image = document.getElementById("image")
 let text = document.querySelector('.short-text')
+let promptSection = document.querySelector(".prompt-section");
 
 // Slide animation
 function slide(move = true){
@@ -176,6 +177,7 @@ function slide(move = true){
     targetLine.classList.add("slide-left")
     image.classList.add("left")
     text.style.display = 'none'
+    promptSection.classList.remove("on")
   }else {
     headLine.classList.remove("slide-left")
     details.classList.remove("slide-left")
@@ -183,6 +185,7 @@ function slide(move = true){
     socialIcons.classList.remove("slide-left")
     socialDetails.classList.remove("slide-left")
     targetLine.classList.remove("slide-left")
+    promptSection.classList.add("on")
     image.classList.remove("left")
     let x = setTimeout(()=> {
       text.style.display = 'block';
