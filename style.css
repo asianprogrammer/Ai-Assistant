@@ -1138,6 +1138,18 @@ footer .icon {
   transform: translateY(16em) rotate(9deg);
 }
 
+.shake {
+  animation: shaking 0.3s infinite;
+}
+
+@keyframes shaking {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(5px); }
+  50% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
 .prompt-container {
   width: 100%;
   height: 55px;
@@ -1219,4 +1231,80 @@ footer .icon {
   padding: 0 1.1em;
   border-radius: 9px;
   background: #2A1640;
+}
+
+.off {
+  display: none !important;
+}
+
+.response {
+  margin-top: 10%;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.4em;
+}
+
+.ai-nanme {
+  margin-left: 0.5em;
+}
+
+.ai-nanme span {
+  color: #D8CBED;
+}
+
+.profile {
+  width: 60px;
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ai-response {
+  width: 100%;
+  max-width: 700px;
+}
+
+.shortcuts {
+  width: 100%;
+  bottom: 100%;
+  position: absolute;
+}
+
+.shortcuts.down {
+  z-index: -1;
+  opacity: 0;
+  transform-origin: left;
+  transform: translateY(50%) rotate(30deg) !important;
+}
+
+.shortcuts .shortcut {
+  color: #fff;
+  width: fit-content;
+  background: #16161f;
+  padding: 0.5em 1em;
+  padding-left: 0.5em;
+  border-radius: 9px;
+  margin: 0.5em 0;
+  cursor: pointer;
+  text-decoration: none;
+  border: solid 2px #16161f;
+}
+
+.shortcuts .shortcut:hover {
+  border-color: #008cff;
+  background: #033055;
+}
+
+.shortcuts .icon {
+  width: 20px;
+  height: 20px;
+  padding: 0.5em;
+  border-radius: 9px;
+  margin-right: 0.5em;
+  background: rgba(255, 255, 255, 0.089);
 }

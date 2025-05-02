@@ -155,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
   animate(".moveAnimation", "moveAnimation");
   animateR("#social", "randomFade");
 });
+
 // All elements of slide fucntion
 let headLine = document.getElementById("main-text");
 let details = document.querySelector(".main-info");
@@ -235,6 +236,7 @@ AI_BUTTTON.addEventListener("click", () => {
     AI_ICONS[1].classList.add('on')
     ai = false;
   }else {
+    AI_GEN(false)
     AI_ICONS[0].classList.add('on')
     AI_ICONS[1].classList.remove('on')
     entrySection.style.display = 'none'
