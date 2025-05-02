@@ -108,7 +108,7 @@ prompt.addEventListener('keyup', function(e){
       shaking()
     }else {
       AI_GEN()
-      console.log(chat(e.target.value))
+      console.log(chat(e.target.value.trim()))
       e.target.value = '';
     }
   }
@@ -142,6 +142,7 @@ sendPrompt.addEventListener('click', function(){
     shaking()
   }else {
     AI_GEN()
+    console.log(chat(prompt.value.trim().value))
   }
   prompt.value = '';
 })
@@ -155,6 +156,8 @@ vocie.addEventListener('click', function(){
     vocie.classList.remove('deactive')
   }
 })
+
+console.log("entry: ", chat("Who are you?"))
 
 function chat(prompt) {
   fetch("/.netlify/functions/chat", {
