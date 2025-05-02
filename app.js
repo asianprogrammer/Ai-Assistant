@@ -95,16 +95,18 @@ function openUI(){
 
 // On key press handle function
 prompt.addEventListener('keyup', function(e){
+  let input = e.target.value.trim()
   if(e.key === "Enter"){
     openUI()
-    if(e.target.value.trim().length < 2){
+    if(input.length < 2){
       e.target.value = '';
       shaking()
     }else {
       AI_GEN()
-      chat(prompt.value.trim().value).then(e=> {
-        console.log(e)
-      })
+      chat(input).then(response => {
+        console.log("AI response:", response.response);
+        // You can do more with the response here
+      });
       e.target.value = '';
     }
   }
