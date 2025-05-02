@@ -170,7 +170,8 @@ function chat(prompt) {
       return res.json();
     })
     .then((data) => {
-      return data.response;
+      console.log(data.response);
+      playAiVoice(data.response)
     })
     .catch((error) => {
       console.error("Error in chat function:", error);
