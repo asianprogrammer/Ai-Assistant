@@ -55,6 +55,7 @@ function search(input) {
 
 
 let AI_SECTION = document.querySelector('.ai-section');
+let AI_TEXT = document.querySelector(".ai-response");
 let ENTRY_SECTION = document.querySelector(".entry-section");
 let AI_RES = document.querySelector(".response");
 let SHORTCUTS = document.querySelector(".shortcuts");
@@ -103,10 +104,14 @@ prompt.addEventListener('keyup', function(e){
       shaking()
     }else {
       AI_GEN()
-      chat(input).then(response => {
-        console.log("AI response:", response.response);
-        // You can do more with the response here
-      });
+      if(!comandOn){
+        chat(input).then(response => {
+          console.log("AI response:", response.response);
+          // You can do more with the response here
+          AI_TEXT.innerHTML = response.response;
+          playAiVoice(response.response)
+        });
+      }
       e.target.value = '';
     }
   }
@@ -141,9 +146,14 @@ sendPrompt.addEventListener('click', function(){
     shaking()
   }else {
     AI_GEN()
-    chat(prompt.value.trim().value).then(e=> {
-      console.log(e)
-    })
+    if(!comandOn){
+      chat(input).then(response => {
+        console.log("AI response:", response.response);
+        // You can do more with the response here
+        AI_TEXT.innerHTML = response.response;
+        playAiVoice(response.response)
+      });
+    }
   }
   prompt.value = '';
 })
