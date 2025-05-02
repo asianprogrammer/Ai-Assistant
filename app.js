@@ -108,6 +108,7 @@ prompt.addEventListener('keyup', function(e){
       shaking()
     }else {
       AI_GEN()
+      console.log(chat(e.target.value))
       e.target.value = '';
     }
   }
@@ -155,7 +156,7 @@ vocie.addEventListener('click', function(){
   }
 })
 
-function chatToVoice(prompt) {
+function chat(prompt) {
   fetch("/.netlify/functions/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -166,8 +167,7 @@ function chatToVoice(prompt) {
       return res.json();
     })
     .then((data) => {
-      console.log("AI says:", data.response);
-      playAiVoice(data.response);
+      return data.response;
     })
     .catch((error) => {
       console.error("Error in chat function:", error);
@@ -177,15 +177,12 @@ function chatToVoice(prompt) {
 }
 
 function playAiVoice(text) {
-  console.log("Generating voice...");
-
   fetch("/.netlify/functions/voice", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ text: text }),
   })
     .then((res) => {
-      console.log("Voice API response status:", res.status);
       if (!res.ok) {
         return res
           .json()
@@ -203,17 +200,12 @@ function playAiVoice(text) {
       return res.arrayBuffer();
     })
     .then((buffer) => {
-      console.log("Audio data received, size:", buffer.byteLength);
       const blob = new Blob([buffer], { type: "audio/mpeg" });
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
 
       audio.onerror = (e) => {
         console.error("Audio playback error:", e);
-      };
-
-      audio.oncanplaythrough = () => {
-        console.log("Audio ready to play");
       };
 
       audio.play().catch((error) => {
