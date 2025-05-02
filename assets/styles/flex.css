@@ -16,3 +16,7 @@
 .FX-end {
     justify-content: flex-end;
 }
+
+.FY-center {
+    align-items: center;
+}

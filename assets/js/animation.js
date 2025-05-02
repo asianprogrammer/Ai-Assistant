@@ -186,10 +186,12 @@ function slide(move = true){
     image.classList.remove("left")
     let x = setTimeout(()=> {
       text.style.display = 'block';
+      clearTimeout(x)
     }, 3000)
   }
 }
 
+let entrySection = document.querySelector(".entry-section");
 let AI_BUTTTON = document.querySelector(".ai-button");
 let AI_BUTTON_ICON = document.getElementById("ai-path");
 let AI_COLOR_ANIMTION = document.querySelector(".ai-animation");
@@ -203,6 +205,7 @@ AI_BUTTTON.addEventListener("click", () => {
   controlGradient(true);
 
   if(ai){
+    entrySection.style.display = 'inline-block';
     slide()
     if (window.innerWidth <= 768) {
       animateGradient(900, 900, -1);
@@ -229,9 +232,10 @@ AI_BUTTTON.addEventListener("click", () => {
     AI_ICONS[1].classList.add('on')
     ai = false;
   }else {
-    slide(false)
     AI_ICONS[0].classList.add('on')
     AI_ICONS[1].classList.remove('on')
+    entrySection.style.display = 'none'
+    slide(false)
     ai = true;
   }
 });
@@ -343,3 +347,20 @@ if (window.innerWidth > 1420) {
     setInterval(change, 6000);
   }, 2000);
 }
+
+
+// Animation for entry ai intro
+let LargeInfo = document.querySelector(".large-details");
+let LargeText = document.querySelector(".large-text");
+let keyOne = document.querySelectorAll(".key")[0];
+let keyTwo = document.querySelectorAll(".key")[1];
+
+function delayAnimation(elements, className){
+  elements.forEach((item, index) => {
+    item.style.setProperty("--dl", index/2+'s')
+    item.classList.add('animateEntry')
+  })
+}
+
+delayAnimation([LargeText, LargeInfo, keyOne, keyTwo])
+
