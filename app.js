@@ -22,7 +22,7 @@ const commands = [
   {
     name: "GitHub",
     url: "https://github.com/asianprogrammer",
-    keywords: ["/github", "/code", '/repo']
+    keywords: ["/github", "/code", '/repo', '/git']
   },
   {
     name: "Telegram",
@@ -98,7 +98,7 @@ function openUI(){
 prompt.addEventListener('keyup', function(e){
   let input = e.target.value.trim()
   if(e.key === "Enter"){
-    AI_TEXT.innerHTML = "Areee. Wait some time"
+    AI_TEXT.innerHTML = "I am thinking. Wait some time"
     AI_TEXT.style.display = 'none';
     openUI()
     if(input.length < 2){
