@@ -688,7 +688,7 @@ footer .icon {
   position: absolute;
   position: absolute;
   overflow: hidden;
-  z-index: 9999;
+  z-index: 11111111;
   pointer-events: none;
 }
 
@@ -1273,12 +1273,14 @@ footer .icon {
   width: 100%;
   bottom: 100%;
   position: absolute;
+  transition: all .3s ease;
 }
 
 .shortcuts.down {
   z-index: -1;
   opacity: 0;
   transform-origin: left;
+  transition: all .3s ease;
   transform: translateY(50%) rotate(30deg) !important;
 }
 

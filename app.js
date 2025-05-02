@@ -12,7 +12,7 @@ function enjection(arg, name, url){
               href="${url}"
               rel="noopener noreferrer" class="shortcut flex FY-center">
               <div class="icon">
-                <img src="./assets/icons/comand.svg" alt="Facebook" >
+                <img src="./assets/icons/internet.svg" alt="Facebook" >
               </div>
               <span>Open ${name}</span>
             </a>`
@@ -23,22 +23,22 @@ const commands = [
   {
     name: "Facebook",
     url: "https://www.facebook.com/programmerasian",
-    keywords: ["facebook", "fb"]
+    keywords: ["/facebook", "/fb"]
   },
   {
     name: "GitHub",
     url: "https://github.com/asianprogrammer",
-    keywords: ["github", "code", 'repo']
+    keywords: ["/github", "/code", '/repo']
   },
   {
     name: "Telegram",
     url: "https://t.me/x86_pro",
-    keywords: ["telegram", "tel", 'message', 'inbox']
+    keywords: ["/telegram", "/tel", '/message', '/inbox']
   },
   {
     name: "Messanger",
     url: "https://m.me/programmerasian?text=From%portfolio%website!",
-    keywords: ["msg", "messanger"]
+    keywords: ["/msg", "/messanger"]
   }
 ];
 
@@ -57,7 +57,6 @@ function search(input) {
       }
     }
   }
-
   return { match: false };
 }
 
@@ -100,7 +99,6 @@ function openUI(){
     comandOpen.click()
   }
 }
-
 
 prompt.addEventListener('keyup', function(e){
   if(e.key === "Enter"){
