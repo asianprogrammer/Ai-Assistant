@@ -98,7 +98,7 @@ function openUI(){
 prompt.addEventListener('keyup', function(e){
   let input = e.target.value.trim()
   if(e.key === "Enter"){
-    AI_TEXT.style.display = 'none !important'
+    AI_TEXT.style.display = 'none';
     openUI()
     if(input.length < 2){
       e.target.value = '';
@@ -106,7 +106,7 @@ prompt.addEventListener('keyup', function(e){
     }else {
       AI_GEN()
       if(!comandOn){
-          AI_TEXT.style.display = 'inline-block';
+          AI_TEXT.style.display = 'block';
         chat(input).then(response => {
           AI_TEXT.innerHTML = response.response;
           playAiVoice(response.response)
@@ -142,13 +142,14 @@ prompt.addEventListener('keyup', function(e){
 
 // On button click heandle fucntion
 sendPrompt.addEventListener('click', function(){
+  AI_TEXT.style.display = 'none';
   let input = prompt.value.trim();
   if(prompt.value.trim().length < 2){
     shaking()
   }else {
     AI_GEN()
     if(!comandOn){
-      AI_TEXT.style.display = 'inline-block';
+      AI_TEXT.style.display = 'block';
       chat(input).then(response => {
 
         AI_TEXT.innerHTML = response.response;
