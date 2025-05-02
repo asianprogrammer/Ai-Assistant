@@ -142,6 +142,7 @@ prompt.addEventListener('keyup', function(e){
 
 // On button click heandle fucntion
 sendPrompt.addEventListener('click', function(){
+  let input = prompt.value.trim();
   if(prompt.value.trim().length < 2){
     shaking()
   }else {

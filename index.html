@@ -9,7 +9,7 @@
       name="description"
       content="Parvez Ahmed, self-taught full-stack web developer with 5+ years’ experience. Specializing in front-end: Figma→fast, responsive, SEO-optimized apps."
     />
-    <link rel="shortcut icon" href="./logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./logo.ico" type="image/x-icon">
     <meta name="theme-color" content="#16161f" />
     <meta name="author" content="Parvez Ahmed" />
     <meta name="robots" content="index, follow" />
@@ -44,7 +44,9 @@
       href="./assets/fonts/Inter-Regular.ttf"
       as="font" type="font/ttf" crossorigin="anonymous"
     />
+    <link rel="preload" as="image" href="./assets/images/jp.png" >
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./assets/styles/chunk.css" />
     <link rel="stylesheet" href="./assets/styles/flex.css" />
     <script src="./app.js" defer></script>
     <script type="application/ld+json">
@@ -237,7 +239,7 @@
     <section class="image-container">
       <div id="image" class="image">
         <div class="target-line">
-          <h3 class="short-text">Hello, I'm Satsuki, AI assistant</h3>
+          <div class="short-text">Hello, I'm Satsuki, AI assistant</div>
           <svg id="scaleSvg"
             width="130"
             height="55"
