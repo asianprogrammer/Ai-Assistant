@@ -98,6 +98,7 @@ function openUI(){
 prompt.addEventListener('keyup', function(e){
   let input = e.target.value.trim()
   if(e.key === "Enter"){
+    AI_TEXT.innerHTML = "Areee. Wait some time"
     AI_TEXT.style.display = 'none';
     openUI()
     if(input.length < 2){
@@ -143,6 +144,7 @@ prompt.addEventListener('keyup', function(e){
 // On button click heandle fucntion
 sendPrompt.addEventListener('click', function(){
   AI_TEXT.style.display = 'none';
+  AI_TEXT.innerHTML = "Wait I am saying..";
   let input = prompt.value.trim();
   if(prompt.value.trim().length < 2){
     shaking()
