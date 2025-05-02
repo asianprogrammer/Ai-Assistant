@@ -838,6 +838,10 @@ footer .icon {
     background: radial-gradient(circle at var(--cx) var(--cy), #ff9a9d8f, #ec11ab60, transparent) !important;
   }
 
+  .ai-response {
+    font-size: 1.1em !important;
+  }
+
   div,
   h1,
   p,
@@ -1125,8 +1129,8 @@ footer .icon {
   opacity: 1;
   bottom: 4em;
   max-width: 500px;
-  z-index: 11111111;
   position: fixed;
+  z-index: 111111111111111;
   transform: translateY(0em) rotate(0deg);
   transition: all .4s ease;
   transition-delay: 1s;
@@ -1266,7 +1270,15 @@ footer .icon {
 
 .ai-response {
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
+  font-size: 1.5em;
+  transition: all .3s ease;
+  animation: ultra .4s forwards;
+  transition: clip-path 0.8s ease, opacity 0.8s ease;
+}
+
+.ai-response::scroll-bar {
+  display: none;
 }
 
 .shortcuts {

@@ -98,6 +98,7 @@ function openUI(){
 prompt.addEventListener('keyup', function(e){
   let input = e.target.value.trim()
   if(e.key === "Enter"){
+    AI_TEXT.style.display = 'none !important'
     openUI()
     if(input.length < 2){
       e.target.value = '';
@@ -105,9 +106,8 @@ prompt.addEventListener('keyup', function(e){
     }else {
       AI_GEN()
       if(!comandOn){
+          AI_TEXT.style.display = 'inline-block';
         chat(input).then(response => {
-          console.log("AI response:", response.response);
-          // You can do more with the response here
           AI_TEXT.innerHTML = response.response;
           playAiVoice(response.response)
         });
@@ -147,9 +147,9 @@ sendPrompt.addEventListener('click', function(){
   }else {
     AI_GEN()
     if(!comandOn){
+      AI_TEXT.style.display = 'inline-block';
       chat(input).then(response => {
-        console.log("AI response:", response.response);
-        // You can do more with the response here
+
         AI_TEXT.innerHTML = response.response;
         playAiVoice(response.response)
       });
