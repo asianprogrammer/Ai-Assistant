@@ -157,12 +157,9 @@ vocie.addEventListener('click', function(){
   }
 })
 
-chat("hi").then(e => {
-  console.log("Outside Call: ", e.response)
-})
 
 function chat(prompt) {
-  fetch("/.netlify/functions/chat", {
+  return fetch("/.netlify/functions/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ prompt: prompt }),
@@ -173,10 +170,13 @@ function chat(prompt) {
     })
     .catch((error) => {
       console.error("Error in chat function:", error);
-      // Provide user feedback about the error
       alert("Sorry, there was a problem processing your request.");
     });
 }
+
+chat("hi").then(e => {
+  console.log("Outside Call:", e.response);
+});
 
 function playAiVoice(text) {
   fetch("/.netlify/functions/voice", {
