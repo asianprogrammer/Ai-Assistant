@@ -157,7 +157,9 @@ vocie.addEventListener('click', function(){
   }
 })
 
-console.log("entry: ", chat("Who are you?"))
+chat("hi").then(e => {
+  console.log("Outside Call: ", e.response)
+})
 
 function chat(prompt) {
   fetch("/.netlify/functions/chat", {
@@ -168,10 +170,6 @@ function chat(prompt) {
     .then((res) => {
       if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
       return res.json();
-    })
-    .then((data) => {
-      console.log(data.response);
-      playAiVoice(data.response)
     })
     .catch((error) => {
       console.error("Error in chat function:", error);
