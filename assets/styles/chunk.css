@@ -635,6 +635,11 @@
     #prompt {
       font-size: 1em !important;
     }
+    .prompt-section:has(#prompt:focus) {
+      left: 0 !important;
+      width: 100% !important;
+      bottom: 0 !important;
+    }
   
     .send {
       margin-left: 0.2em !important;
