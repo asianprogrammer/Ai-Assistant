@@ -644,6 +644,7 @@
       left: 0 !important;
       width: 100% !important;
       bottom: 0 !important;
+      transition-delay: 0s !important;
     }
   
     .send {
