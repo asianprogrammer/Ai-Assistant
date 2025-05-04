@@ -259,6 +259,7 @@
     margin-top: -10px;
     text-align: right;
     position: absolute;
+    font-size: 1.5em;
     opacity: 0;
     -webkit-clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
             clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
