@@ -600,6 +600,10 @@
       position: relative !important;
       z-index: 1111111111 !important;
     }
+
+    .animation:has(.connect) {
+      backdrop-filter: blur(6px) !important;
+    }
   
     .connect .icon {
       width: 20px;

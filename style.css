@@ -474,6 +474,12 @@ articale h1 {
   background: rgba(255, 255, 255, 0.205);
 }
 
+.animation:has(.connect) {
+  width: fit-content;
+  border-radius: 28px;
+  backdrop-filter: blur(2px);
+}
+
 .connect::before {
   content: "";
   position: absolute;
