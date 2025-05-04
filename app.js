@@ -193,6 +193,7 @@ function chat(prompt) {
 let currentAudio = null;
 
 function playAiVoice(text) {
+  if(!enabled) { return false}
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
