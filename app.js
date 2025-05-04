@@ -190,7 +190,15 @@ function chat(prompt) {
 }
 
 
+let currentAudio = null;
+
 function playAiVoice(text) {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+
   fetch("/.netlify/functions/voice", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -202,12 +210,10 @@ function playAiVoice(text) {
           .json()
           .then((data) => {
             throw new Error(
-              `Voice API error (${res.status}): ${
-                data.error || "Unknown error"
-              }`
+              `Voice API error (${res.status}): ${data.error || "Unknown error"}`
             );
           })
-          .catch((e) => {
+          .catch(() => {
             throw new Error(`Voice API error: ${res.status}`);
           });
       }
@@ -222,6 +228,7 @@ function playAiVoice(text) {
         console.error("Audio playback error:", e);
       };
 
+      currentAudio = audio;
       audio.play().catch((error) => {
         console.error("Audio play error:", error);
       });
