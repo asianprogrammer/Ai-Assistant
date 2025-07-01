@@ -172,7 +172,7 @@ main {
   height: 100%;
   position: relative;
   border-radius: 60px;
-  background: #7942bc;
+  background: #641ab5;
   border-top-left-radius: 120px;
 }
 
@@ -448,7 +448,7 @@ article h1 .letter {
   }
 }
 
-articale h1 {
+article h1 {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
