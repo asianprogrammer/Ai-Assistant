@@ -1,4 +1,4 @@
-function enjection(arg, name, url){
+function injection(arg, name, url){
   if(arg){
     SHORTCUTS.innerHTML = `
                 <a id="commandOpen"
@@ -121,7 +121,7 @@ prompt.addEventListener('keyup', function(e){
     commandOn = true;
     commandOpen = document.getElementById('commandOpen')
     let result = search(e.target.value)
-    enjection(result.match, result.name, result.url)
+    injection(result.match, result.name, result.url)
     SHORTCUTS.classList.remove('down')
   }else {
     commandOpen = '';
