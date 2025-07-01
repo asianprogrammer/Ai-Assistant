@@ -17,32 +17,44 @@ const commands = [
   {
     name: "GitHub",
     url: "https://github.com/asianprogrammer",
-    keywords: ["/github", "/code", '/repo', '/git']
+    keywords: ["/github", "/code", '/repo', '/git', '/']
   },
   {
     name: "Telegram",
     url: "https://t.me/x86_pro",
-    keywords: ["/telegram", "/tel", '/message', '/inbox']
+    keywords: ["/telegram", "/tel", '/message', '/inbox', '/te']
   },
 ];
 
 function search(input) {
-  const cleaned = input.toLowerCase();
+    const cleaned = input.toLowerCase();
 
-  for (const command of commands) {
-    for (const keyword of command.keywords) {
-      if (cleaned.includes(keyword)) {
+    if (cleaned === '/') {
         return {
-          match: true,
-          name: command.name,
-          url: command.url
+            match: true,
+            commands: commands.map(command => ({
+                name: command.name,
+                url: command.url
+            }))
         };
-      }
     }
-  }
-  return { match: false };
-}
 
+    if (cleaned.startsWith('/')) {
+        for (const command of commands) {
+            for (const keyword of command.keywords) {
+                if (cleaned === keyword) {
+                    return {
+                        match: true,
+                        name: command.name,
+                        url: command.url
+                    };
+                }
+            }
+        }
+    }
+
+    return { match: false };
+}
 
 let AI_SECTION = document.querySelector('.ai-section');
 let AI_TEXT = document.querySelector(".ai-response");
