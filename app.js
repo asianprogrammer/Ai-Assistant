@@ -1,7 +1,7 @@
 function enjection(arg, name, url){
   if(arg){
     SHORTCUTS.innerHTML = `
-                <a id="comandOpen"
+                <a id="commandOpen"
               target="_blank"
               href="${url}"
               rel="noopener noreferrer" class="shortcut flex FY-center">
@@ -15,11 +15,6 @@ function enjection(arg, name, url){
 
 const commands = [
   {
-    name: "Facebook",
-    url: "https://www.facebook.com/programmerasian",
-    keywords: ["/facebook", "/fb"]
-  },
-  {
     name: "GitHub",
     url: "https://github.com/asianprogrammer",
     keywords: ["/github", "/code", '/repo', '/git']
@@ -29,11 +24,6 @@ const commands = [
     url: "https://t.me/x86_pro",
     keywords: ["/telegram", "/tel", '/message', '/inbox']
   },
-  {
-    name: "Messanger",
-    url: "https://m.me/programmerasian?text=From%portfolio%website!",
-    keywords: ["/msg", "/messanger"]
-  }
 ];
 
 function search(input) {
@@ -61,7 +51,7 @@ let AI_RES = document.querySelector(".response");
 let SHORTCUTS = document.querySelector(".shortcuts");
 let prompt = document.getElementById("prompt");
 let sendPrompt = document.getElementById("sendPrompt");
-let vocie = document.querySelector('.voice');
+let voice = document.querySelector('.voice');
 let promptContainer = document.querySelector(".prompt-section");
 let enabled = true;
 
@@ -85,12 +75,12 @@ function AI_GEN(text = true){
   }
 }
 
-let comandOn = false;
-let comandOpen = '';
+let commandOn = false;
+let commandOpen = '';
 
 function openUI(){
-  if(String(comandOpen).length > 3 && comandOn){
-    comandOpen.click()
+  if(String(commandOpen).length > 3 && commandOn){
+    commandOpen.click()
   }
 }
 
@@ -106,7 +96,7 @@ prompt.addEventListener('keyup', function(e){
       shaking()
     }else {
       AI_GEN()
-      if(!comandOn){
+      if(!commandOn){
           AI_TEXT.style.display = 'block';
         chat(input).then(response => {
           AI_TEXT.innerHTML = response.response;
@@ -118,30 +108,30 @@ prompt.addEventListener('keyup', function(e){
   }
 
   if(e.key === '/'){
-    comandOn = true;
+    commandOn = true;
     SHORTCUTS.classList.remove('down')
   }
 
   if(e.code === "Space"){
-    comandOn = false;
+    commandOn = false;
     SHORTCUTS.classList.add('down')
   }
 
   if(search(e.target.value).match){
-    comandOn = true;
-    comandOpen = document.getElementById('comandOpen')
+    commandOn = true;
+    commandOpen = document.getElementById('commandOpen')
     let result = search(e.target.value)
     enjection(result.match, result.name, result.url)
     SHORTCUTS.classList.remove('down')
   }else {
-    comandOpen = '';
-    comandOn = false;
+    commandOpen = '';
+    commandOn = false;
     SHORTCUTS.classList.add('down');
   }
 
 })
 
-// On button click heandle fucntion
+// On button click handle function
 sendPrompt.addEventListener('click', function(){
   AI_TEXT.style.display = 'none';
   AI_TEXT.innerHTML = "Wait I am saying..";
@@ -150,7 +140,7 @@ sendPrompt.addEventListener('click', function(){
     shaking()
   }else {
     AI_GEN()
-    if(!comandOn){
+    if(!commandOn){
       AI_TEXT.style.display = 'block';
       chat(input).then(response => {
 
@@ -162,13 +152,13 @@ sendPrompt.addEventListener('click', function(){
   prompt.value = '';
 })
 
-vocie.addEventListener('click', function(){
+voice.addEventListener('click', function(){
   if(enabled){
     enabled = false
-    vocie.classList.add('deactive')
+    voice.classList.add('deactive')
   }else {
     enabled = true
-    vocie.classList.remove('deactive')
+    voice.classList.remove('deactive')
   }
 })
 
