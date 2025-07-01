@@ -22,7 +22,7 @@ const commands = [
   {
     name: "Telegram",
     url: "https://t.me/x86_pro",
-    keywords: ["/telegram", "/tel", '/message', '/inbox', '/te']
+    keywords: ["/telegram", "/tel", '/message', '/inbox', '/te', '/msg', "/connect"]
   },
 ];
 
@@ -31,12 +31,10 @@ function search(input) {
 
     if (cleaned === '/') {
         return {
-            match: true,
-            commands: commands.map(command => ({
-                name: command.name,
-                url: command.url
-            }))
-        };
+                  match: true,
+                  name: commands[0].name,
+                  url: commands[0].url
+              };
     }
 
     if (cleaned.startsWith('/')) {
