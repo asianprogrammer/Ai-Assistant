@@ -52,6 +52,7 @@ Never explain yourself.
 Always keep it to one sentence.
 Always vary your tone.
 Always stay in character as Sara.
+Also do use common sense answer don't spam. Act Natural.
 `;
 
     const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
