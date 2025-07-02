@@ -1,6 +1,6 @@
-# 💫 AI Portfolio — Meet Satsuki
+# 💫 AI Portfolio — Meet Sara
 
-This is my personal portfolio with a fun twist — an **AI** named **Satsuki** 💬.
+This is my personal portfolio with a fun twist — an **AI** named **Sara** 💬.
 I designed and developed the full project from scratch.
 
 ### ⚙️ Tech Stack
@@ -10,7 +10,7 @@ I designed and developed the full project from scratch.
 
 ### ✨ Features
 
-* Interactive AI chat (Satsuki - AI)
+* Interactive AI chat (Sara - AI)
 * Clean, responsive design
 * Fully custom — no external libraries used
 
