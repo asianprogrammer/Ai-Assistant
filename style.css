@@ -261,7 +261,7 @@ main {
   border-radius: 50%;
   position: absolute;
   z-index: 111111111;
-  background: rgba(115, 0, 255, 0.424);
+  background: rgb(97 8 193);
 }
 
 .ai-button::before {
@@ -294,7 +294,7 @@ main {
 }
 
 .ai-button:hover {
-  background: rgba(139, 44, 255, 0.424);
+  background: rgb(121, 19, 230);
 }
 
 @keyframes driftTopLeft {

@@ -17,4 +17,3 @@ I designed and developed the full project from scratch.
 ### 📖 About
 
 This project combines a portfolio with an AI assistant for a creative and engaging experience.
-I'm planning to make it **open source** soon.
