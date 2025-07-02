@@ -93,8 +93,8 @@ function controlGradient(shouldShow = true) {
     clearInterval(rotateInterval);
 
     rotateInterval = setInterval(() => {
-      currentAngle += 1;
-      if (currentAngle >= 350) {
+      currentAngle += 2;
+      if (currentAngle >= 650) {
         currentAngle = 0;
       }
       bodyAfter.style.setProperty("--angle", currentAngle + "deg");
