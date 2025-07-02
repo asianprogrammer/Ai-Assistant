@@ -1,3 +1,7 @@
+:root {
+  --d: .5s;
+}
+
 @font-face {
   font-family: "Ink";
   src: url("./assets/fonts/InknutAntiqua-Bold.ttf") format("truetype");
@@ -330,10 +334,6 @@ article {
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-}
-
-.animation {
-  animation-delay: 0.5s !important;
 }
 
 .animation {
