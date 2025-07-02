@@ -450,6 +450,10 @@
     .social-icons {
       width: 90%;
       margin-left: 5%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      justify-content: space-evenly;
     }
   
     .social-icons .icon {
@@ -458,7 +462,7 @@
     }
   
     .social-icons a {
-      width: 100%;
+      width: fit-content;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
