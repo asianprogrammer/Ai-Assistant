@@ -316,11 +316,9 @@ const audio = new Audio()
 const AUDIO_URL = './assets/sounds/'
 const anime = document.querySelector("#imageAnime");
 
-let inital = true;
 let track_rand = -1;
 function Rand(max) {
   return Math.floor(Math.random() * max)
-  return track_rand = (track_rand + 1) % max;
 }
 
 anime.addEventListener('click', function(){
@@ -329,7 +327,7 @@ anime.addEventListener('click', function(){
 })
 
 var texts = [
-  "Hello, I'm Satsuki, AI assistant",
+  "Hello, I'm Sara, AI assistant",
   "I'm here to provide detailed information about Parvez Ahmed",
   "Need assistance? I'm here to help",
   "Have a question? Click the AI button to ask anything about Parvez",

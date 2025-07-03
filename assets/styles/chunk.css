@@ -824,7 +824,7 @@
     transition: all .1s ease
   }
   
-  .voice.deactive {
+  .voice.deactivate {
     opacity: .3;
   }
   
@@ -834,7 +834,7 @@
     outline: none;
     color: #fff;
     font-size: 1.1em;
-    padding: 1em 1em;
+    padding: 1em 0.5em;
     font-family: Inter;
     background: transparent;
   }
@@ -878,8 +878,8 @@
     -webkit-transition: all .2s ease;
     -o-transition: all .2s ease;
     transition: all .2s ease;
-    -webkit-animation: downToup .5s forwards;
-            animation: downToup .5s forwards;
+    -webkit-animation: downToUp .5s forwards;
+            animation: downToUp .5s forwards;
     -webkit-transform-origin: left center;
         -ms-transform-origin: left center;
             transform-origin: left center;
@@ -890,7 +890,7 @@
             animation-delay: var(--dl);
   }
   
-  @-webkit-keyframes downToup {
+  @-webkit-keyframes downToUp {
     0% {
       opacity: 0;
       -webkit-transform: translateY(6em) rotate(9deg);
@@ -903,7 +903,7 @@
     }
   }
   
-  @keyframes downToup {
+  @keyframes downToUp {
     0% {
       opacity: 0;
       -webkit-transform: translateY(6em) rotate(9deg);
@@ -937,11 +937,11 @@
     font-size: 1.4em;
   }
   
-  .ai-nanme {
+  .ai-name {
     margin-left: 0.5em;
   }
   
-  .ai-nanme span {
+  .ai-name span {
     color: #D8CBED;
   }
   

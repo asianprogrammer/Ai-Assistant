@@ -165,10 +165,10 @@ sendPrompt.addEventListener('click', function(){
 voice.addEventListener('click', function(){
   if(enabled){
     enabled = false
-    voice.classList.add('deactive')
+    voice.classList.add('deactivate')
   }else {
     enabled = true
-    voice.classList.remove('deactive')
+    voice.classList.remove('deactivate')
   }
 })
 
