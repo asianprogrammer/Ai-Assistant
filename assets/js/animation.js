@@ -85,23 +85,25 @@ let rotateInterval;
 function controlGradient(shouldShow = true) {
   const bodyAfter = document.querySelector(".ai-animation");
 
+  clearInterval(rotateInterval);
+
   if (shouldShow) {
-    bodyAfter.style.setProperty("--angle", "0deg");
-    bodyAfter.style.setProperty("opacity", "1");
+    bodyAfter?.style.setProperty("--angle", "0deg");
+    bodyAfter?.style.setProperty("opacity", "1");
+    bodyAfter.style.display = "block";
 
     let currentAngle = 0;
-    clearInterval(rotateInterval);
-
     rotateInterval = setInterval(() => {
-      currentAngle += 2;
-      if (currentAngle >= 650) {
-        currentAngle = 0;
-      }
-      bodyAfter.style.setProperty("--angle", currentAngle + "deg");
-    }, 16); // about 60fps = 1000ms/60 ≈ 16ms
+      currentAngle = (currentAngle + 2) % 360;
+      bodyAfter?.style.setProperty("--angle", currentAngle + "deg");
+    }, 16);
   } else {
-    clearInterval(rotateInterval);
-    bodyAfter.style.setProperty("opacity", "0");
+    bodyAfter?.style.setProperty("opacity", "0");
+    bodyAfter?.style.setProperty("--angle", "0deg");
+    bodyAfter?.style.setProperty("display", "none");
+    
+    // Completely remove from DOM
+    // bodyAfter?.remove();
   }
 }
 
@@ -156,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
   animateR("#social", "randomFade");
 });
 
-// All elements of slide fucntion
+// All elements of slide function
 let headLine = document.getElementById("main-text");
 let details = document.querySelector(".main-info");
 let connect = document.querySelector(".connect");
@@ -196,51 +198,51 @@ function slide(move = true){
 }
 
 let entrySection = document.querySelector(".entry-section");
-let AI_BUTTTON = document.querySelector(".ai-button");
+let AI_BUTTON = document.querySelector(".ai-button");
 let AI_BUTTON_ICON = document.getElementById("ai-path");
-let AI_COLOR_ANIMTION = document.querySelector(".ai-animation");
+let AI_COLOR_ANIMATION = document.querySelector(".ai-animation");
 let AI_ICONS = document.querySelectorAll(".ai");
 let ai = true;
 let AI_SOUND = new Audio();
 AI_SOUND.src = "./assets/sounds/ai.mp3";
 
-AI_BUTTTON.addEventListener("click", () => {
-  createSVGFrame(true);
-  controlGradient(true);
+AI_BUTTON.addEventListener("click", () => {
+  if (ai) {
+    createSVGFrame(true);
+    controlGradient(true);
 
-  if(ai){
     entrySection.style.display = 'inline-block';
-    slide()
+    slide();
+
     if (window.innerWidth <= 768) {
       animateGradient(900, 900, -1);
-      let x = setTimeout(() => {
-        AI_SOUND.play();
-        clearTimeout(x);
-      }, 300);
+      setTimeout(() => AI_SOUND.play(), 300);
     } else {
       animateGradient(2000, 2000);
-      let x = setTimeout(() => {
-        AI_SOUND.play();
-        clearTimeout(x);
-      }, 1000);
+      setTimeout(() => AI_SOUND.play(), 1000);
     }
-  
-    AI_COLOR_ANIMTION.classList.remove("off");
-    let x = setTimeout(() => {
-      controlGradient(false);
-      createSVGFrame(false);
-      AI_COLOR_ANIMTION.classList.add("off");
-      clearTimeout(x);
+
+    AI_COLOR_ANIMATION.classList.remove("off");
+
+    setTimeout(() => {
+      controlGradient(false); // Stop gradient spinning after delay
+      createSVGFrame(false);  // Remove SVG frame
+      AI_COLOR_ANIMATION.classList.add("off");
     }, 2000);
-    AI_ICONS[0].classList.remove('on')
-    AI_ICONS[1].classList.add('on')
+
+    AI_ICONS[0].classList.remove('on');
+    AI_ICONS[1].classList.add('on');
     ai = false;
-  }else {
-    AI_GEN(false)
-    AI_ICONS[0].classList.add('on')
-    AI_ICONS[1].classList.remove('on')
-    entrySection.style.display = 'none'
-    slide(false)
+
+  } else {
+    // Turning AI off immediately
+    controlGradient(false);       // stop and reset animation
+    createSVGFrame(false);        // remove SVG mask
+    AI_GEN(false);                // (assuming this is your custom off state)
+    AI_ICONS[0].classList.add('on');
+    AI_ICONS[1].classList.remove('on');
+    entrySection.style.display = 'none';
+    slide(false);
     ai = true;
   }
 });
