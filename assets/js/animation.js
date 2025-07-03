@@ -94,7 +94,7 @@ function controlGradient(shouldShow = true) {
 
     let currentAngle = 0;
     rotateInterval = setInterval(() => {
-      currentAngle = (currentAngle + 2) % 360;
+      currentAngle = (currentAngle + 1.8) % 360;
       bodyAfter?.style.setProperty("--angle", currentAngle + "deg");
     }, 16);
   } else {
