@@ -661,7 +661,7 @@
       border-radius: 0;
       transition: all .4s ease;
       margin: 0 !important;
-      border-left: solid 1px #0c0c38;
+      border-left: solid 1px #3a1e57;
     }
   
     .send {
@@ -817,6 +817,7 @@
   .voice {
     width: 30px;
     height: 30px;
+    margin-left: 0.2em;
     cursor: pointer;
     -webkit-transition: all .1s ease;
     -o-transition: all .1s ease;
