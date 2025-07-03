@@ -176,13 +176,18 @@ voice.addEventListener('click', function(){
 function chat(prompt) {
 
   if (['i hate you', 'you are noob', 'fuck', 'stupid'].includes(prompt.toLowerCase())) {
-    new Audio('./assets/sounds/tuco-get-out.mp3').play()
+    let T = setTimeout(function(){
+      new Audio('./assets/sounds/tuco-get-out.mp3').play()
+      clearTimeout(T)
+    }, 300)
     return 0;
   }
 
   if (['i love you', 'i want you'].includes(prompt.toLowerCase())) {
-    new Audio('./assets/sounds/ami-bishwas-kori-na.mp3').play()
-    return 0;
+    let TT = setTimeout(function(){
+      new Audio('./assets/sounds/ami-bishwas-kori-na.mp3').play()
+      clearTimeout(TT)
+    }, 500)
   }
 
   return fetch("/.netlify/functions/chat", {
