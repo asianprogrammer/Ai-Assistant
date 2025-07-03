@@ -149,6 +149,7 @@ sendPrompt.addEventListener('click', function(){
   if(prompt.value.trim().length < 2){
     shaking()
   }else {
+    new Audio('./assets/sounds/pew.mp3').play();
     AI_GEN()
     if(!commandOn){
       AI_TEXT.style.display = 'block';
