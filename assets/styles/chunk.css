@@ -649,6 +649,19 @@
       width: 100% !important;
       bottom: 0 !important;
       transition-delay: 0s !important;
+      border-radius: 0px !important;
+    }
+
+    .prompt-container:has(#prompt:focus) {
+      border-radius: 0;
+      transition: all .4s ease;
+    }
+
+    .prompt-container:has(#prompt:focus) ~ .send {
+      border-radius: 0;
+      transition: all .4s ease;
+      margin: 0 !important;
+      border-left: solid 1px #0c0c38;
     }
   
     .send {
