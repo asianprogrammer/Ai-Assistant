@@ -190,6 +190,14 @@ function chat(prompt) {
     }, 500)
   }
 
+    if (['Are you crazy?', 'Noob', 'Bot', 'Lol'].includes(prompt.toLowerCase())) {
+    let TT = setTimeout(function(){
+      new Audio('./assets/sounds/ami-bishwas-kori-na.mp3').play()
+      clearTimeout(TT)
+    }, 500)
+    return 0;
+  }
+
   return fetch("/.netlify/functions/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
