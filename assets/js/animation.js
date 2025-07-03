@@ -322,7 +322,7 @@ function Rand(max) {
 }
 
 anime.addEventListener('click', function(){
-  audio.src = `${AUDIO_URL+Rand(4)}.mp3`
+  audio.src = `${AUDIO_URL+Rand(5)}.mp3`
   audio.play()
 })
 
