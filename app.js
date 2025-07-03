@@ -192,7 +192,7 @@ function chat(prompt) {
 
     if (['are you crazy?', 'noob', 'bot', 'lol'].includes(prompt.toLowerCase())) {
     let TT = setTimeout(function(){
-      new Audio('./assets/sounds/ami-bishwas-kori-na.mp3').play()
+      new Audio('./assets/sounds/hu.mp3').play()
       clearTimeout(TT)
     }, 500)
     return 0;
